@@ -1,0 +1,89 @@
+/* GLOBAL */
+body {
+    height: 2500px;
+}
+
+html, h1, div, ul, li {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.lineBreak {
+    display: block;
+}
+
+/*=============== HEADER ===============*/
+header {
+    background: #0089af;
+    border-bottom: 2px solid #FF6E00;
+}
+
+header .logo {
+    display: flex;
+
+}
+
+header .logo h1 {
+    color: white;
+    margin-left: 20px;
+    font-size: 24px;
+    align-self: flex-end;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    height: 80px;
+}
+
+header img {
+    margin-top: 5px;
+    width: 60px;
+    height: 60px;
+}
+
+header .nav{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+header .nav ul {
+    margin-right: 20px;
+}
+
+header .nav li { 
+    padding: 0 20px;
+    border-right: 1px solid #FF6E00;
+}
+
+header .nav li:last-child { border-right: 0; }
+
+header .nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+/*=============== PARALLAX BACKGROUND ===============*/
+
+.parallax {
+    min-height: 500px;
+    position: relative;
+    background-image: url('../img/sky.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; /* ebasi qkoto neshto! */
+    background-attachment: fixed;
+}
+
+/*=============== CONTENT ===============*/
+
+/* MAIN CONTENT */
+
+.main-content .content {
+    margin-top: 80px;
+    background: #666;
+    height: 400px;
+}
