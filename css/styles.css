@@ -1,12 +1,25 @@
 /* GLOBAL */
 body {
     height: 2500px;
+    background: rgb(232, 229, 245);
 }
 
-html, h1, div, ul, li {
-    margin: 0;
-    padding: 0;
-    border: 0;
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
 }
 
 .lineBreak {
@@ -15,32 +28,36 @@ html, h1, div, ul, li {
 
 /*=============== HEADER ===============*/
 header {
-    background: #0089af;
-    border-bottom: 2px solid #FF6E00;
+    background: #5A6571;
+    border-bottom: 2px solid #FD9308;
 }
 
 header .logo {
     display: flex;
-
+    align-items: center;
+    margin-bottom: 5px;
 }
 
 header .logo h1 {
     color: white;
-    margin-left: 20px;
-    font-size: 24px;
-    align-self: flex-end;
+    margin-left: 15px;
+    margin-top: 7px;
+    font-size: 26px;
+    font-weight: bold;
+    font-family: 'Merriweather Sans', sans-serif;
+    cursor: default;
 }
 
 .header-content {
     display: flex;
     align-items: center;
-    height: 80px;
+    height: 70px;
 }
 
 header img {
     margin-top: 5px;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
 }
 
 header .nav{
@@ -55,23 +72,23 @@ header .nav ul {
 
 header .nav li { 
     padding: 0 20px;
-    border-right: 1px solid #FF6E00;
+    border-right: 1px solid #FD9308;
 }
 
 header .nav li:last-child { border-right: 0; }
 
 header .nav a {
-    color: white;
+    color: #E5E8ED;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 13px;
+    font-weight: bold;
 }
 
 /*=============== PARALLAX BACKGROUND ===============*/
-
 .parallax {
-    min-height: 500px;
+    height: 600px;
     position: relative;
-    background-image: url('../img/sky.jpg');
+    background-image: url('../img/sunny.jpeg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover; /* ebasi qkoto neshto! */
@@ -80,10 +97,16 @@ header .nav a {
 
 /*=============== CONTENT ===============*/
 
+/* ROUND TOGGLE SWITCH BUTTON */
+.toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
+.toggle.ios .toggle-handle { border-radius: 20px; }
+
 /* MAIN CONTENT */
 
 .main-content .content {
-    margin-top: 80px;
+    position: relative;
+    margin-top: 100px;
     background: #666;
-    height: 400px;
+    height: 600px;
+    opacity: 0.96;
 }

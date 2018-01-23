@@ -6,8 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:700" rel="stylesheet"> <!-- GOOGLE FONT FOR NAME OF THE WEBSITE -->
+    <link rel="stylesheet" href="css/bootstrap.min.css"> <!-- BOOTSTRAP FILE -->
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet"> <!-- TOGGLE SWITCH BUTTON BOOTSTRAP API -->
+    <link rel="stylesheet" href="css/styles.css"> <!-- MAIN CSS FILE -->
+    <link rel="stylesheet" href="css/weather-icons.min.css"> <!-- WEATHER ICONS FILE -->
 </head>
 
 <body>
@@ -18,13 +21,13 @@
             <div class="row header-content">
                 <div class="col-xs-3 logo">
                     <img src="img/image-white.png">
-                    <h1>Weather <span class="lineBreak">Earth</span></h1>
+                    <h1>WeatherEarth</h1>
                 </div>
                 <div class="col-xs-4 col-xs-offset-2 nav">
                     <ul class="list-inline">
-                        <li><a href="#">ГАЛЕРИЯ</a></li>
-                        <li><a href="#">КАРТИ</a></li>
-                        <li><a href="#">ЛУНА</a></li>
+                        <li><a href="#">GALLERY</a></li>
+                        <li><a href="#">MAPS</a></li>
+                        <li><a href="#">MOON</a></li>
                     </ul>
                 </div>
                 <div class="col-xs-3 search-bar">
@@ -45,7 +48,9 @@
         <div class="container main-content">
             <div class="row content">
                 <div class="col-xs-9 main">
-                    <h1 class="city-name">СОФИЯ</h1>
+                    <h1 class="city-name">SOFIA</h1>
+                    <input type="checkbox" data-on="&deg;C" data-off="&deg;F" data-onstyle="primary" data-offstyle="info" checked data-toggle="toggle" data-style="ios">
+                    <i class="wi wi-day-cloudy"></i>
                 </div>
                 <div class="col-xs-3 side">
 
@@ -55,6 +60,7 @@
     </div>
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 </body>
 
 </html>
