@@ -29,7 +29,7 @@ time, mark, audio, video {
 /*=============== HEADER ===============*/
 header {
     background: #5A6571;
-    border-bottom: 2px solid #FD9308;
+    /* border-bottom: 2px solid #FD9308; */
 }
 
 header .logo {
