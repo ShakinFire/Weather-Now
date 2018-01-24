@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="js/jquery-ui.min.css">
+
+
+    <title>Weather API functionality & autosuggest test</title>
+    <style>
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="form-inline col-xs-4">
+                <form action="" class='form'>
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" name="city" class="form-control city">
+                        <input type="submit" class="btn btn-primary search" value="Search">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="content">
+            <h1 class='city'></h1>
+            <h2 class="temp"></h2>
+            <h3 class="main"></h3>
+
+            <ul class='info' style='list-style-type:none'>
+                <li class='description'></li>
+                <li class='pressure'></li>
+                <li class="humidity"></li>
+            </ul>
+        </div>
+    </div>
+</body>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+<script src="js/external/jquery/jquery.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+
+<script>
+    // module database 
+    // module DOM
+    // module WeatherApp
+
+    var database = (function () {
+        var citiesList = [];
+
+        var _addInCitiesList = function (data) {
+            $(data["values"]).each(function (index, elem) {
+                citiesList.push(elem);
+            });
+        }
+        var _getAllCities = (function () {
+            $.getJSON("cities.json", _addInCitiesList);
+        })();
+
+        var _flattenObject = function (json, resultArray) {
+            $.each(json, function (indexInArray, valueOfElement) {
+                if (typeof valueOfElement === "object") {
+                    _flattenObject(valueOfElement, resultArray)
+                } else {
+                    resultArray[indexInArray] = valueOfElement;
+                }
+            });
+        };
+
+        var getWeatherInfo = function (city, unit) {
+            var un = unit || "metric";
+            var result = {};
+            
+            var url = "http://api.openweathermap.org/data/2.5/weather?q=" + city + 
+                      "&appid=b566e35c1181791b83b9aefcbe9be910&units=" + un;
+
+            $.getJSON(url, function(data) {
+                _flattenObject(data, result);
+            });
+
+            return result;
+        };
+
+        return {
+            citiesList,
+            getWeatherInfo
+        }
+
+    })();
+
+    var DOM = (function(){
+        var city =  $('.content .city');
+        console.log(database.citiesList);
+    })();
+
+    var app = (function(DOM, database){
+        var unit = "Celsius";
+        var bindEvents = function() {
+            //
+        }
+        changeUnit(unit) {
+            
+        }
+
+        bindEvents();
+    });
+
+
+
+    // $(document).ready(function () {
+
+    //     let availableTags = [];
+
+
+
+
+    //     var boot = function () {
+    //         syncPage("Sofia");
+    //     }
+
+    //     var syncPage = function (city) {
+    //         $.ajax({
+                // url: "http://api.openweathermap.org/data/2.5/weather?q=" + city +
+                //     "&appid=b566e35c1181791b83b9aefcbe9be910&units=metric",
+    //             success: function (result) {
+    //                 displayData(result);
+    //             },
+    //             statusCode: {
+    //                 404: function () {
+    //                     displayErrors();
+    //                 }
+    //             }
+    //         });
+    //     }
+
+    //     // updates the DOM with the actual information from the API
+    //     var displayData = function (data) {
+    //         var obj = {};
+    //         _flattenObject(data, obj);
+    //         console.log(obj)
+    //         if ($(".content").hasClass('hidden')) {
+    //             $(".content").removeClass('hidden');
+    //             $(".error").remove();
+    //         }
+    //         $('.content').hide().slideDown()
+    //         $('.content .city').text(obj.name);
+    //         $('.content .main').text(obj.main);
+    //         $('.content .temp').text(Math.round(obj.temp) + " " + String.fromCharCode(8451));
+    //         $('.content .description').text("Description: " + obj.description);
+    //         $('.content .pressure').text("Pressure: " + obj.pressure);
+    //         $('.content .humidity').text("Humidity: " + obj.humidity);
+    //     }
+
+    //     var displayErrors = function () {
+    //         //check if there is already an element with class error
+    //         if ($(".error").length === 0) {
+    //             $(".content").addClass('hidden');
+    //             var errorMessage = "<h3 class='error'> No results found :( </h3>"
+    //             $(errorMessage).appendTo(".container");
+    //         }
+    //     }
+
+    //     // remove nested objects inside of the JSON object from the API
+    //     var _flattenObject = function (json, resultArray) {
+    //         $.each(json, function (indexInArray, valueOfElement) {
+    //             if (typeof valueOfElement === "object") {
+    //                 _flattenObject(valueOfElement, resultArray)
+    //             } else {
+    //                 resultArray[indexInArray] = valueOfElement;
+    //             }
+    //         });
+    //     };
+
+
+    //     $(".city").autocomplete({
+    //         source: function (request, response) {
+    //             var matches = $.map(availableTags, function (acItem) {
+    //                 if (acItem.toUpperCase().indexOf(request.term.toUpperCase()) === 0) {
+    //                     return acItem;
+    //                 }
+    //             });
+    //             response(matches);
+    //         },
+    //         select: function (event, ui) {
+    //             syncPage(ui.item.value);
+    //         }
+
+    //     })
+
+    //     $(".search").on('click', function (e) {
+    //         e.preventDefault();
+    //         var value = $(".city").val();
+    //         syncPage(value);
+    //     })
+
+    //     boot();
+    // });
+</script>
+
+</html>
