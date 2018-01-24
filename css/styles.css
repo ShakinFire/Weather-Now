@@ -19,7 +19,7 @@ menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
 	padding: 0;
-	border: 0;
+    border: 0;
 }
 
 .lineBreak {
@@ -106,7 +106,49 @@ header .nav a {
 .main-content .content {
     position: relative;
     margin-top: 100px;
-    background: #666;
     height: 600px;
-    opacity: 0.96;
+}
+
+.main-content .main .weather-info {
+    padding: 13px;
+    background: #E5E8ED;
+    border-radius: 5px;
+}
+
+.main-content .main .head-section-title {
+    font-family: 'Cabin', sans-serif;
+    text-align: center;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #666;
+    margin-bottom: 15px;
+}
+
+.main-content .main .city-name {
+    font-family: 'Cabin', sans-serif;
+    letter-spacing: 1px;
+    font-size: 45px;
+    color: #5A6571;
+}
+
+.main-content .main .country-name { 
+    color: #5A6571;
+}
+
+.main-content .main .weather-icon {
+    font-size: 70px;
+    color: #5A6571;
+    margin-top: 20px;
+}
+
+.main-content .main .plus-icon {
+    font-size: 25px;
+}
+
+.main-content .main .cel-far {
+    font-size: 70px;
+    font-weight: bold;
+}
+
+.main-content .main .main-weather-section {
+    margin-top: 30px;
 }
