@@ -110,7 +110,7 @@ header .nav a {
 }
 
 .main-content .main .weather-info {
-    padding: 13px;
+    padding: 6px 13px;
     background: #E5E8ED;
     border-radius: 5px;
 }
@@ -127,16 +127,13 @@ header .nav a {
     font-family: 'Cabin', sans-serif;
     letter-spacing: 1px;
     font-size: 45px;
-    color: #5A6571;
 }
 
 .main-content .main .country-name { 
-    color: #5A6571;
 }
 
 .main-content .main .weather-icon {
     font-size: 70px;
-    color: #5A6571;
     margin-top: 20px;
 }
 
