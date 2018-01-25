@@ -29,7 +29,7 @@ time, mark, audio, video {
 /*=============== HEADER ===============*/
 header {
     background: #5A6571;
-    border-bottom: 2px solid #FD9308;
+    /* border-bottom: 2px solid #FD9308; */
 }
 
 header .logo {
@@ -81,7 +81,8 @@ header .nav a {
     color: #E5E8ED;
     text-decoration: none;
     font-size: 13px;
-    font-weight: bold;
+    letter-spacing: 1px;
+    /* font-weight: bold; */
 }
 
 /*=============== PARALLAX BACKGROUND ===============*/
@@ -110,7 +111,7 @@ header .nav a {
 }
 
 .main-content .main .weather-info {
-    padding: 6px 13px;
+    padding: 10px 13px;
     background: #E5E8ED;
     border-radius: 5px;
 }
@@ -118,34 +119,42 @@ header .nav a {
 .main-content .main .head-section-title {
     font-family: 'Cabin', sans-serif;
     text-align: center;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #666;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #FD9308;
     margin-bottom: 15px;
+    color: rgb(80, 83, 85);
 }
 
 .main-content .main .city-name {
     font-family: 'Cabin', sans-serif;
     letter-spacing: 1px;
     font-size: 45px;
+    color: rgb(80, 83, 85);
 }
 
 .main-content .main .country-name { 
+    color: rgb(80, 83, 85);
 }
 
 .main-content .main .weather-icon {
     font-size: 70px;
+    color: rgb(80, 83, 85);
     margin-top: 20px;
 }
 
 .main-content .main .plus-icon {
     font-size: 25px;
+    color: #FD9308;
 }
 
 .main-content .main .cel-far {
     font-size: 70px;
     font-weight: bold;
+    color: rgb(80, 83, 85);
 }
 
-.main-content .main .main-weather-section {
-    margin-top: 30px;
+.main-content .main .main-weather-section { margin-top: 30px; }
+.main-content .main .main-weather-section-below p {
+    color: rgb(80, 83, 85);
+    font-size: 18px;
 }

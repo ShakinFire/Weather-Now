@@ -6,19 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href ="css/font-awesome.min.css"> <!-- FONT-AWSOME ICONS -->
+    <!-- FONT-AWSOME ICONS -->
+    <link rel="stylesheet" href ="css/font-awesome.min.css">
+    <!-- GOOGLE FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:700" rel="stylesheet">
-    <!-- GOOGLE FONT FOR NAME OF THE WEBSITE -->
     <link href="https://fonts.googleapis.com/css?family=Cabin:600" rel="stylesheet">
-    <!-- GOOGLE FONT FOR NAME OF THE WEBSITE -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- BOOTSTRAP FILE -->
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- TOGGLE SWITCH BUTTON BOOTSTRAP API -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <!-- MAIN CSS FILE -->
-    <link rel="stylesheet" href="css/weather-icons.min.css">
+    <link rel="stylesheet" href="css/styles.css">
     <!-- WEATHER ICONS FILE -->
+    <link rel="stylesheet" href="css/weather-icons.min.css">
 </head>
 
 <body>
@@ -72,7 +72,7 @@
                                 <h4 class="country-name">Bulgaria</h4>
                             </div>
                             <div class="col-xs-2">
-                                <input type="checkbox" data-size="mini" data-on="&deg;C" data-off="&deg;F" data-onstyle="primary" data-offstyle="info" checked data-toggle="toggle" data-style="ios">
+                                <input type="checkbox" data-size="mini" data-on="&deg;C" data-off="&deg;F" data-onstyle="warning" data-offstyle="info" checked data-toggle="toggle" data-style="ios">
                             </div>
                             <div class="col-xs-2">
                                 <i class="fa fa-plus-circle plus-icon" aria-hidden="true"></i>
@@ -81,13 +81,19 @@
                         <div class="row main-weather-section">
                             <div class="col-xs-5">
                                 <p class="text-center cel-far">9&deg;</p>
-                                <p class="text-center feels-like">Feels like 5&deg;</p>
                             </div>
                             <div class="col-xs-5 col-xs-offset-2">
                                 <i class="wi wi-day-cloudy weather-icon"></i>
-                                <p class="text-center">Partly cloudy</p>
                             </div>
                         </div>
+                        <div class="row main-weather-section-below">
+                                <div class="col-xs-5">
+                                    <p class="text-center">Feels like 9&deg;</p>
+                                </div>
+                                <div class="col-xs-5 col-xs-offset-2">
+                                    <p>Partly Cloudy</p>
+                                </div>
+                            </div>
                     </div>
                 </div>
                 <div class="col-xs-3 col-xs-offset-5 side">
@@ -96,7 +102,6 @@
             </div>
         </div>
     </div>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta et quos sint laudantium quisquam vitae ipsam fuga tempora vero. Nobis!</p>
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
