@@ -4,6 +4,15 @@ body {
     background: rgb(232, 229, 245);
 }
 
+.head-section-title {
+    font-family: 'Cabin', sans-serif;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #FD9308;
+    margin-bottom: 15px;
+    color: rgb(80, 83, 85);
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -115,16 +124,6 @@ header .nav a {
     background: #E5E8ED;
     border-radius: 5px;
 }
-
-.main-content .main .head-section-title {
-    font-family: 'Cabin', sans-serif;
-    text-align: center;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #FD9308;
-    margin-bottom: 15px;
-    color: rgb(80, 83, 85);
-}
-
 .main-content .main .city-name {
     font-family: 'Cabin', sans-serif;
     letter-spacing: 1px;
@@ -181,4 +180,18 @@ header .nav a {
     padding-left: 10px;
     color: rgb(80, 83, 85);
     font-family: 'Cabin', sans-serif;
+}
+
+/* FAVORITE CITIES */
+.main-content .favorite-cities {
+    padding: 10px 13px;
+    background: rgb(229, 232, 237, 0.9);    
+    border-radius: 5px;
+}
+
+.main-content .fav-cities-list {
+    text-decoration: none;
+    color: rgb(80, 83, 85);
+    font-size: 20px;
+    font-family: Calibri, 'Trebuchet MS', sans-serif;
 }
