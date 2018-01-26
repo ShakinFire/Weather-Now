@@ -30,9 +30,9 @@
             <div class="form-inline col-xs-4">
                 <form action="" class='form'>
                     <div class="form-group">
-                        <label for="city">City</label>
-                        <input type="text" name="city" class="form-control city">
-                        <input type="submit" class="btn btn-primary search" value="Search">
+                        <label for="search">City</label>
+                        <input type="text" name="search" class="form-control city">
+                        <input type="submit" class="btn btn-primary button" value="Search">
                     </div>
                 </form>
             </div>
@@ -71,30 +71,57 @@
         var _getAllCities = (function () {
             $.getJSON("cities.json", _addInCitiesList);
         })();
+      
+        var _flattenObject = function (ob) {
+            var toReturn = {};
 
-        var _flattenObject = function (json, resultArray) {
-            $.each(json, function (indexInArray, valueOfElement) {
-                if (typeof valueOfElement === "object") {
-                    _flattenObject(valueOfElement, resultArray)
+            for (var i in ob) {
+                if (!ob.hasOwnProperty(i)) continue;
+
+                if ((typeof ob[i]) == 'object') {
+                    var flatObject = _flattenObject(ob[i]);
+                    for (var x in flatObject) {
+                        if (!flatObject.hasOwnProperty(x)) continue;
+
+                        toReturn[x] = flatObject[x];
+                    }
                 } else {
-                    resultArray[indexInArray] = valueOfElement;
+                    toReturn[i] = ob[i];
                 }
-            });
+            }
+            return toReturn;
         };
 
-        var getWeatherInfo = function (city, unit) {
+        var getWeatherInfo = function (city, unit, successCallback, failCallback) {
             var un = unit || "metric";
-            var result = {};
-            
-            var url = "http://api.openweathermap.org/data/2.5/weather?q=" + city + 
-                      "&appid=b566e35c1181791b83b9aefcbe9be910&units=" + un;
+            var url = "http://api.openweathermap.org/data/2.5/weather?q=" + city +
+                "&appid=b566e35c1181791b83b9aefcbe9be910&units=" + un;
 
-            $.getJSON(url, function(data) {
-                _flattenObject(data, result);
+            function makeRequest() {
+                var promise = new Promise(function (resolve, reject) {
+                    $.ajax({
+                        url: url,
+                        datatype: "application/json",
+                        success: resolve, 
+                        error: reject
+                    });
+                })
+                return promise;
+            }
+            // makeRequest().done(successCallback(data));
+            // makeRequest().fail(failCallback());
+            makeRequest().then(function (data) {
+                data = _flattenObject(data);
+                successCallback(data);
+                console.log(data)
             });
 
-            return result;
-        };
+            makeRequest().catch(function () {
+                failCallback();
+                console.log(data)
+
+            });
+        }
 
         return {
             citiesList,
@@ -103,113 +130,95 @@
 
     })();
 
-    var DOM = (function(){
-        var city =  $('.content .city');
-        console.log(database.citiesList);
+    var DOM = (function () {
+        var $content = $(".content");
+        var $search = $(".search");
+        var $button = $(".button");
+
+        var displayData = function (obj) {
+            // if ($(".content").hasClass('hidden')) {
+            //     $(".content").removeClass('hidden');
+            //     $(".error").remove();
+            // }
+            console.log(obj);
+            $('.content').hide().fadeIn()
+            $('.city').text(obj.name);
+            $('.main').text(obj.main);
+            $('.temp').text(Math.round(obj.temp) + "°");
+            $('.description').text(obj.description);
+            $('.pressure').text(obj.pressure);
+            $('.humidity').text(obj.humidity);
+        };
+
+        var displayError = function () {
+            alert("no results find");
+        }
+
+        return {
+            displayData,
+            displayError
+        }
     })();
 
-    var app = (function(DOM, database){
-        var unit = "Celsius";
-        var bindEvents = function() {
-            //
-        }
-        changeUnit(unit) {
-            
+    var app = (function () {
+        var unit = "metric";
+
+        var update = function (city, unit) {
+            database.getWeatherInfo(city, unit, DOM.displayData, DOM.displayError);
+
+        };
+
+        var bindEvents = function () {
+            $(".button").on('click', function (e) {
+                e.preventDefault();
+                var value = $(".city").val();
+                update(value, unit)
+            });
+
+            $(".city").autocomplete({
+                source: function (request, response) {
+                    var matches = $.map(database.citiesList, function (acItem) {
+                        if (acItem.toUpperCase().indexOf(request.term.toUpperCase()) ===
+                            0) {
+                            return acItem;
+                        }
+                    });
+                    response(matches);
+                },
+                select: function (event, ui) {
+                    update(ui.item.value, unit);
+                }
+
+            });
+
         }
 
-        bindEvents();
+        var setUnit = function (newUnit) {
+            unit = newUnit;
+        }
+
+        var getUnit = function () {
+            return unit;
+        }
+
+        var init = function () {
+            console.log(DOM);
+            console.log(database)
+            bindEvents();
+
+            update("Sofia", unit)
+        }
+
+        return {
+            init,
+            getUnit,
+            setUnit,
+        }
+    })();
+
+    $(document).ready(function () {
+        app.init();
     });
-
-
-
-    // $(document).ready(function () {
-
-    //     let availableTags = [];
-
-
-
-
-    //     var boot = function () {
-    //         syncPage("Sofia");
-    //     }
-
-    //     var syncPage = function (city) {
-    //         $.ajax({
-                // url: "http://api.openweathermap.org/data/2.5/weather?q=" + city +
-                //     "&appid=b566e35c1181791b83b9aefcbe9be910&units=metric",
-    //             success: function (result) {
-    //                 displayData(result);
-    //             },
-    //             statusCode: {
-    //                 404: function () {
-    //                     displayErrors();
-    //                 }
-    //             }
-    //         });
-    //     }
-
-    //     // updates the DOM with the actual information from the API
-    //     var displayData = function (data) {
-    //         var obj = {};
-    //         _flattenObject(data, obj);
-    //         console.log(obj)
-    //         if ($(".content").hasClass('hidden')) {
-    //             $(".content").removeClass('hidden');
-    //             $(".error").remove();
-    //         }
-    //         $('.content').hide().slideDown()
-    //         $('.content .city').text(obj.name);
-    //         $('.content .main').text(obj.main);
-    //         $('.content .temp').text(Math.round(obj.temp) + " " + String.fromCharCode(8451));
-    //         $('.content .description').text("Description: " + obj.description);
-    //         $('.content .pressure').text("Pressure: " + obj.pressure);
-    //         $('.content .humidity').text("Humidity: " + obj.humidity);
-    //     }
-
-    //     var displayErrors = function () {
-    //         //check if there is already an element with class error
-    //         if ($(".error").length === 0) {
-    //             $(".content").addClass('hidden');
-    //             var errorMessage = "<h3 class='error'> No results found :( </h3>"
-    //             $(errorMessage).appendTo(".container");
-    //         }
-    //     }
-
-    //     // remove nested objects inside of the JSON object from the API
-    //     var _flattenObject = function (json, resultArray) {
-    //         $.each(json, function (indexInArray, valueOfElement) {
-    //             if (typeof valueOfElement === "object") {
-    //                 _flattenObject(valueOfElement, resultArray)
-    //             } else {
-    //                 resultArray[indexInArray] = valueOfElement;
-    //             }
-    //         });
-    //     };
-
-
-    //     $(".city").autocomplete({
-    //         source: function (request, response) {
-    //             var matches = $.map(availableTags, function (acItem) {
-    //                 if (acItem.toUpperCase().indexOf(request.term.toUpperCase()) === 0) {
-    //                     return acItem;
-    //                 }
-    //             });
-    //             response(matches);
-    //         },
-    //         select: function (event, ui) {
-    //             syncPage(ui.item.value);
-    //         }
-
-    //     })
-
-    //     $(".search").on('click', function (e) {
-    //         e.preventDefault();
-    //         var value = $(".city").val();
-    //         syncPage(value);
-    //     })
-
-    //     boot();
-    // });
 </script>
 
 </html>
