@@ -11,6 +11,7 @@
     <!-- GOOGLE FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cabin:600" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300" rel="stylesheet">
     <!-- BOOTSTRAP FILE -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- TOGGLE SWITCH BUTTON BOOTSTRAP API -->
@@ -87,25 +88,55 @@
                             </div>
                         </div>
                         <div class="row main-weather-section-below">
-                                <div class="col-xs-5">
-                                    <p class="text-center">Feels like 9&deg;</p>
-                                </div>
-                                <div class="col-xs-5 col-xs-offset-2">
-                                    <p>Partly Cloudy</p>
-                                </div>
+                            <div class="col-xs-5">
+                                <p class="text-center">Feels like 9&deg;</p>
                             </div>
+                            <div class="col-xs-5 col-xs-offset-2">
+                                <p>Partly Cloudy</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weather-details">
+                        <p class="head-section-title">WEATHER DETAILS</p>
+                        <div class='row'>
+                            <div class="col-xs-4">
+                                <ul class="list-unstyled">
+                                    <li>Highest<span class"temp_max">12&deg;</span></li>
+                                    <li>Lowest<span class"temp_min">6&deg;</span></li>
+                                    <li>Sunrise<span class"sunrise">7:16</span></li>
+                                    <li>Sunset<span class"sunset">21:32</span></li>
+                                </ul>
+                            </div>
+                            <div class="col-xs-offset-1 col-xs-7">
+                                <ul class='list-unstyled'>
+                                    <li>Wind Speed<span class"speed">20 m/s</span></li>
+                                    <li>Cloudliness<span class"cloudy">10%</span></li>
+                                    <li>Humidity<span class"humidity">75%</span></li>
+                                    <li>Pressure<span class"pressure">1003mb</span></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-xs-3 col-xs-offset-5 side">
-
+                <div class="col-xs-3 col-xs-offset-5 favorite-cities">
+                    <p class="head-section-title">FAVORITES</p>
+                    <ul class='list-unstyled'>
+                        <a class="fav-cities-list" href='#'><li>London</li><span onclick="hide()" class="cross"><i class="fa fa-times" aria-hidden="true"></i></span></a>
+                        <a class="fav-cities-list" href='#'><li>New York</li><span class="cross"><i class="fa fa-times" aria-hidden="true"></i></span></a>
+                        <a class="fav-cities-list" href='#'><li>Los Angelis</li><span class="cross"><i class="fa fa-times" aria-hidden="true"></i></span></a>
+                        <a class="fav-cities-list" href='#'><li>Rome</li><span class="cross"><i class="fa fa-times" aria-hidden="true"></i></span></a>
+                        <a class="fav-cities-list" href='#'><li>Tokyo</li><span class="cross"><i class="fa fa-times" aria-hidden="true"></i></span></a>
+                        <a class="fav-cities-list" href='#'><li>Hong Kong</li><span class="cross"><i class="fa fa-times" aria-hidden="true"></i></span></a>
+                        <a class="fav-cities-list" href='#'><li>Moscow</li><span class="cross"><i class="fa fa-times" aria-hidden="true"></i></span></a>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-    <p>Testing new branch commit</p>
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script src="js/test.js"></script>
 </body>
 
 </html>
