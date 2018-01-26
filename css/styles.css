@@ -158,3 +158,19 @@ header .nav a {
     color: rgb(80, 83, 85);
     font-size: 18px;
 }
+
+/* WEATHER DETAILS  */ 
+.weather-details {
+    margin-top: 5%;
+    padding: 13px;
+    background: rgb(229, 232, 237, 0.9);
+    border-radius: 5px;
+    font-family: 'Cabin', sans-serif;
+}
+
+.weather-details .row li a {
+    color: #666;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+}
