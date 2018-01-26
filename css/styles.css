@@ -4,6 +4,15 @@ body {
     background: rgb(232, 229, 245);
 }
 
+.head-section-title {
+    font-family: 'Cabin', sans-serif;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #FD9308;
+    margin-bottom: 15px;
+    color: rgb(80, 83, 85);
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -44,7 +53,7 @@ header .logo h1 {
     margin-top: 7px;
     font-size: 26px;
     font-weight: bold;
-    font-family: 'Merriweather Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
     cursor: default;
 }
 
@@ -81,12 +90,13 @@ header .nav a {
     color: #E5E8ED;
     text-decoration: none;
     font-size: 13px;
-    font-weight: bold;
+    letter-spacing: 1px;
+    /* font-weight: bold; */
 }
 
 /*=============== PARALLAX BACKGROUND ===============*/
 .parallax {
-    height: 600px;
+    height: 700px;
     position: relative;
     background-image: url('../img/sunny.jpeg');
     background-repeat: no-repeat;
@@ -110,45 +120,102 @@ header .nav a {
 }
 
 .main-content .main .weather-info {
-    padding: 13px;
-    background: #E5E8ED;
+    padding: 10px 13px;
+    background: rgba(229, 232, 237, 0.9);
     border-radius: 5px;
 }
-
-.main-content .main .head-section-title {
-    font-family: 'Cabin', sans-serif;
-    text-align: center;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #666;
-    margin-bottom: 15px;
-}
-
 .main-content .main .city-name {
     font-family: 'Cabin', sans-serif;
     letter-spacing: 1px;
-    font-size: 45px;
-    color: #5A6571;
+    font-size: 35px;
+    color: rgb(80, 83, 85);
 }
 
 .main-content .main .country-name { 
-    color: #5A6571;
+    color: rgb(80, 83, 85);
+    padding-left: 15px;
 }
 
 .main-content .main .weather-icon {
     font-size: 70px;
-    color: #5A6571;
+    color: rgb(80, 83, 85);
     margin-top: 20px;
 }
 
 .main-content .main .plus-icon {
     font-size: 25px;
+    color: #FD9308;
 }
 
 .main-content .main .cel-far {
     font-size: 70px;
     font-weight: bold;
+    color: rgb(80, 83, 85);
 }
 
-.main-content .main .main-weather-section {
-    margin-top: 30px;
+.main-content .main .main-weather-section { margin-top: 30px; }
+.main-content .main .main-weather-section-below p {
+    color: rgb(80, 83, 85);
+    font-size: 18px;
+}
+
+/* WEATHER DETAILS  */ 
+.weather-details {
+    margin-top: 3%;
+    padding: 13px;
+    background: rgba(229, 232, 237, 0.9);
+    border-radius: 5px;
+    font-family: 'Cabin', sans-serif;
+}
+
+.weather-details .row li {
+    color: rgb(102, 106, 107);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 10px 0;
+    font-family: 'Nunito', sans-serif;
+}
+
+.weather-details span {
+    padding-left: 10px;
+    color: rgb(80, 83, 85);
+    font-family: 'Cabin', sans-serif;
+}
+
+/* FAVORITE CITIES */
+.main-content .favorite-cities {
+    padding: 10px 13px;
+    background: rgba(229, 232, 237, 0.9);
+    border-radius: 5px;
+}
+
+.main-content .fav-cities-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    padding: 0 10px;
+    border-left: 3px solid transparent;
+    border-radius: 3px;
+    text-decoration: none;
+}
+
+.main-content .favorite-cities li {
+    color: rgb(80, 83, 85);
+    font-size: 22px;
+    font-family: Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.main-content .fav-cities-list:hover {
+    background: rgb(235, 235, 235);
+    border-left: 3px solid #FD9308;
+}
+
+.main-content .fav-cities-list:hover .cross i { display: flex; }
+
+.main-content .fav-cities-list .cross i {
+    font-size: 18px;
+    color: rgb(139, 139, 139);
+    padding: 4px;
+    display: none;    
 }

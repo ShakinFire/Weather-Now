@@ -67,13 +67,11 @@
             $(data["values"]).each(function (index, elem) {
                 citiesList.push(elem);
             });
-
         }
-
         var _getAllCities = (function () {
             $.getJSON("cities.json", _addInCitiesList);
         })();
-
+      
         var _flattenObject = function (ob) {
             var toReturn = {};
 
@@ -124,7 +122,6 @@
 
             });
         }
-
 
         return {
             citiesList,
