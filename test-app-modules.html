@@ -100,20 +100,28 @@
                 "&appid=b566e35c1181791b83b9aefcbe9be910&units=" + un;
 
             function makeRequest() {
-                return $.ajax({
-                    url: url,
-                    datatype: "application/json",
-                });
+                var promise = new Promise(function (resolve, reject) {
+                    $.ajax({
+                        url: url,
+                        datatype: "application/json",
+                        success: resolve, 
+                        error: reject
+                    });
+                })
+                return promise;
             }
             // makeRequest().done(successCallback(data));
             // makeRequest().fail(failCallback());
-            makeRequest().done(function (data) {
+            makeRequest().then(function (data) {
                 data = _flattenObject(data);
                 successCallback(data);
+                console.log(data)
             });
 
-            makeRequest().fail(function () {
+            makeRequest().catch(function () {
                 failCallback();
+                console.log(data)
+
             });
         }
 
@@ -157,7 +165,6 @@
 
     var app = (function () {
         var unit = "metric";
-
 
         var update = function (city, unit) {
             database.getWeatherInfo(city, unit, DOM.displayData, DOM.displayError);
