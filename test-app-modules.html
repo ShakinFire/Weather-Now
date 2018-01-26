@@ -69,12 +69,58 @@
             });
 
         }
+
         var _getAllCities = (function () {
             $.getJSON("cities.json", _addInCitiesList);
         })();
 
+        var _flattenObject = function (ob) {
+            var toReturn = {};
+
+            for (var i in ob) {
+                if (!ob.hasOwnProperty(i)) continue;
+
+                if ((typeof ob[i]) == 'object') {
+                    var flatObject = _flattenObject(ob[i]);
+                    for (var x in flatObject) {
+                        if (!flatObject.hasOwnProperty(x)) continue;
+
+                        toReturn[x] = flatObject[x];
+                    }
+                } else {
+                    toReturn[i] = ob[i];
+                }
+            }
+            return toReturn;
+        };
+
+        var getWeatherInfo = function (city, unit, successCallback, failCallback) {
+            var un = unit || "metric";
+            var url = "http://api.openweathermap.org/data/2.5/weather?q=" + city +
+                "&appid=b566e35c1181791b83b9aefcbe9be910&units=" + un;
+
+            function makeRequest() {
+                return $.ajax({
+                    url: url,
+                    datatype: "application/json",
+                });
+            }
+            // makeRequest().done(successCallback(data));
+            // makeRequest().fail(failCallback());
+            makeRequest().done(function (data) {
+                data = _flattenObject(data);
+                successCallback(data);
+            });
+
+            makeRequest().fail(function () {
+                failCallback();
+            });
+        }
+
+
         return {
             citiesList,
+            getWeatherInfo
         }
 
     })();
@@ -97,57 +143,24 @@
             $('.description').text(obj.description);
             $('.pressure').text(obj.pressure);
             $('.humidity').text(obj.humidity);
+        };
+
+        var displayError = function () {
+            alert("no results find");
         }
 
         return {
-            displayData
+            displayData,
+            displayError
         }
     })();
 
     var app = (function () {
         var unit = "metric";
 
-        var flattenObject = function (ob) {
-            var toReturn = {};
-
-            for (var i in ob) {
-                if (!ob.hasOwnProperty(i)) continue;
-
-                if ((typeof ob[i]) == 'object') {
-                    var flatObject = flattenObject(ob[i]);
-                    for (var x in flatObject) {
-                        if (!flatObject.hasOwnProperty(x)) continue;
-
-                        toReturn[x] = flatObject[x];
-                    }
-                } else {
-                    toReturn[i] = ob[i];
-                }
-            }
-            return toReturn;
-        };
-
 
         var update = function (city, unit) {
-            var un = unit || "metric";
-            var url = "http://api.openweathermap.org/data/2.5/weather?q=" + city +
-                "&appid=b566e35c1181791b83b9aefcbe9be910&units=" + un;
-
-            function makeRequest() {
-                return $.ajax({
-                    url: url,
-                    datatype: "application/json",
-                });
-            }
-            makeRequest().done(function (data) {
-                let result = flattenObject(data);
-                DOM.displayData(result);
-            });
-
-            makeRequest().fail(function () {
-                alert("no results found")
-            });
-
+            database.getWeatherInfo(city, unit, DOM.displayData, DOM.displayError);
 
         };
 
@@ -202,7 +215,6 @@
     $(document).ready(function () {
         app.init();
     });
-
 </script>
 
 </html>
