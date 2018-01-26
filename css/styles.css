@@ -87,7 +87,7 @@ header .nav a {
 
 /*=============== PARALLAX BACKGROUND ===============*/
 .parallax {
-    height: 600px;
+    height: 700px;
     position: relative;
     background-image: url('../img/sunny.jpeg');
     background-repeat: no-repeat;
@@ -128,12 +128,13 @@ header .nav a {
 .main-content .main .city-name {
     font-family: 'Cabin', sans-serif;
     letter-spacing: 1px;
-    font-size: 45px;
+    font-size: 35px;
     color: rgb(80, 83, 85);
 }
 
 .main-content .main .country-name { 
     color: rgb(80, 83, 85);
+    padding-left: 15px;
 }
 
 .main-content .main .weather-icon {
@@ -161,16 +162,23 @@ header .nav a {
 
 /* WEATHER DETAILS  */ 
 .weather-details {
-    margin-top: 5%;
+    margin-top: 3%;
     padding: 13px;
     background: rgb(229, 232, 237, 0.9);
     border-radius: 5px;
     font-family: 'Cabin', sans-serif;
 }
 
-.weather-details .row li a {
-    color: #666;
+.weather-details .row li {
+    color: rgb(102, 106, 107);
     text-decoration: none;
-    font-size: 13px;
-    font-weight: bold;
+    font-size: 14px;
+    padding: 10px 0;
+    font-family: 'Nunito', sans-serif;
+}
+
+.weather-details span {
+    padding-left: 10px;
+    color: rgb(80, 83, 85);
+    font-family: 'Cabin', sans-serif;
 }
