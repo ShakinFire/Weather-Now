@@ -166,3 +166,80 @@ var app = (function () {
 $(document).ready(function () {
     app.init();
 });
+
+// Implementing add and delete favorite city functionality
+
+$(function(){
+    var checkExistingName = function(cityToCheck) {
+        var initialFavorites = JSON.parse(localStorage.getItem("favorites"));
+        var isChecked = false;
+        initialFavorites.forEach((val) => {
+            if (cityToCheck === val) {
+                isChecked = true;
+            }
+        });
+        return isChecked;
+    }
+
+    var generateFavoriteCities = function() {
+        var initialFavorites = JSON.parse(localStorage.getItem("favorites"));
+        initialFavorites.forEach((val) => {
+            var placeHolder = `<a class='fav-cities-list' href='#'>
+            <li>` + val + `</li>
+            <span class='cross'>
+                <i class='fa fa-times' aria-hidden='true'></i>
+            </span>
+            </a>`;
+            $("#ul-fav-cities").append(placeHolder);
+        });      
+    }
+
+    if (localStorage.length === 0) {
+        var holdDefault = ['Varna', 'Sofia', 'Vidin', 'Burgas'];
+        localStorage.setItem("favorites", JSON.stringify(holdDefault));
+        var initialFavorites = JSON.parse(localStorage.getItem("favorites"));
+    }
+    generateFavoriteCities();
+
+    var deleteItem = function(deletedCity) {
+        var initialFavorites = JSON.parse(localStorage.getItem("favorites"));
+        for (let i = 0; i < initialFavorites.length; i += 1) {
+            if (initialFavorites[i] === deletedCity) {
+                initialFavorites.splice(i, 1);
+                break;
+            }
+        }
+
+        localStorage.setItem("favorites", JSON.stringify(initialFavorites));
+    }
+
+    var addCity = function(addedCity) {
+        var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
+        currentFavorites.push(addedCity);
+        localStorage.setItem("favorites", JSON.stringify(currentFavorites));
+        currentFavorites = JSON.parse(localStorage.getItem("favorites"));
+    }
+
+    $("#add-city").on("click", function() {
+        var $cityName = $(".city-name").text();
+        if (checkExistingName($cityName)) {
+            alert("ima go moi");
+        } else {
+            var placeHolder = `<a class='fav-cities-list' href='#'>
+            <li>` + $cityName + `</li>
+            <span class='cross'>
+                <i class='fa fa-times' aria-hidden='true'></i>
+            </span>
+            </a>`;
+            $("#ul-fav-cities").append(placeHolder);
+            addCity($cityName);
+        }
+    });
+
+    $(".cross").on("click", function() {
+        debugger;
+        var name = $(this).prev().text();
+        $(this).parent().css("display", "none");
+        deleteItem(name);
+    });
+});

@@ -91,7 +91,7 @@ header .nav a {
     text-decoration: none;
     font-size: 13px;
     letter-spacing: 1px;
-    /* font-weight: bold; */
+    font-family: 'Cabin', sans-serif;
 }
 
 /*=============== PARALLAX BACKGROUND ===============*/
@@ -165,7 +165,6 @@ header .nav a {
     padding: 13px;
     background: rgba(229, 232, 237, 0.9);
     border-radius: 5px;
-    font-family: 'Cabin', sans-serif;
 }
 
 .weather-details .row li {
@@ -176,11 +175,11 @@ header .nav a {
     font-family: 'Nunito', sans-serif;
 }
 
-.weather-details span {
+.weather-details .weather-values {
     padding-left: 10px;
     color: rgb(80, 83, 85);
-    font-family: 'Cabin', sans-serif;
 }
+.weather-details span{ font-family: 'Cabin', sans-serif; }
 
 /* FAVORITE CITIES */
 .main-content .favorite-cities {
@@ -202,8 +201,8 @@ header .nav a {
 
 .main-content .favorite-cities li {
     color: rgb(80, 83, 85);
-    font-size: 22px;
-    font-family: Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 19px;
+    font-family: 'Nunito', sans-serif;
 }
 
 .main-content .fav-cities-list:hover {

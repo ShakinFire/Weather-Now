@@ -81,7 +81,7 @@
                                     data-toggle="toggle" data-style="ios">
                             </div>
                             <div class="col-xs-2">
-                                <i class="fa fa-plus-circle plus-icon" aria-hidden="true"></i>
+                                <a id="add-city" href="#"><i class="fa fa-plus-circle plus-icon" aria-hidden="true"></i></a>
                             </div>
                         </div>
                         <div class="row main-weather-section">
@@ -105,6 +105,7 @@
                             </div>
                         </div>
                     </div>
+    <!-- WEATHER DETAILS -->
                     <div class="weather-details">
                         <p class="head-section-title">WEATHER DETAILS</p>
                         <div class='row'>
@@ -127,67 +128,26 @@
                             <div class="col-xs-6">
                                 <ul class='list-unstyled'>
                                     <li>Wind Speed:
-                                        <span class="speed"></span>m/s
+                                        <span class="speed weather-values"></span><span>m/s</span>
                                     </li>
                                     <li>Cloudliness:
-                                        <span class="clouds"></span>%
+                                        <span class="clouds weather-values"></span><span>%</span>
                                     </li>
                                     <li>Humidity:
-                                        <span class="humidity"></span>%
+                                        <span class="humidity weather-values"></span><span>%</span>
                                     </li>
                                     <li>Pressure:
-                                        <span class="pressure"></span>mb
+                                        <span class="pressure weather-values"></span><span>mb</span>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
+    <!-- FAVORITE CITIES -->
                 <div class="col-xs-3 col-xs-offset-5 favorite-cities">
                     <p class="head-section-title">FAVORITES</p>
-                    <ul class='list-unstyled'>
-                        <a class="fav-cities-list" href='#'>
-                            <li>London</li>
-                            <span onclick="hide()" class="cross">
-                                <i class="fa fa-times" aria-hidden="true"></i>
-                            </span>
-                        </a>
-                        <a class="fav-cities-list" href='#'>
-                            <li>New York</li>
-                            <span class="cross">
-                                <i class="fa fa-times" aria-hidden="true"></i>
-                            </span>
-                        </a>
-                        <a class="fav-cities-list" href='#'>
-                            <li>Los Angelis</li>
-                            <span class="cross">
-                                <i class="fa fa-times" aria-hidden="true"></i>
-                            </span>
-                        </a>
-                        <a class="fav-cities-list" href='#'>
-                            <li>Rome</li>
-                            <span class="cross">
-                                <i class="fa fa-times" aria-hidden="true"></i>
-                            </span>
-                        </a>
-                        <a class="fav-cities-list" href='#'>
-                            <li>Tokyo</li>
-                            <span class="cross">
-                                <i class="fa fa-times" aria-hidden="true"></i>
-                            </span>
-                        </a>
-                        <a class="fav-cities-list" href='#'>
-                            <li>Hong Kong</li>
-                            <span class="cross">
-                                <i class="fa fa-times" aria-hidden="true"></i>
-                            </span>
-                        </a>
-                        <a class="fav-cities-list" href='#'>
-                            <li>Moscow</li>
-                            <span class="cross">
-                                <i class="fa fa-times" aria-hidden="true"></i>
-                            </span>
-                        </a>
+                    <ul id="ul-fav-cities" class='list-unstyled'>
                     </ul>
                 </div>
             </div>
