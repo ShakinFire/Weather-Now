@@ -97,11 +97,27 @@ var DOM = (function () {
         $('.clouds').text(obj.all);
         $('.pressure').text(obj.pressure);
         $('.humidity').text(obj.humidity);
+
+        $('.lat').text(obj.lat);
+        $('.lon').text(obj.lon);
+
+        var lat = obj.lat;
+        var lon = obj.lon;
+        // function myMap() {
+
+        //     var mapProp = {
+        //         center: new google.maps.LatLng(obj.lat, obj.lon),
+        //         zoom: 13,
+        //     };
+        //     var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+        // }
+
     };
 
     var displayError = function () {
-        alert("no results find");
+        // alert("no results find");
     }
+
 
     return {
         displayData,
@@ -115,6 +131,9 @@ var app = (function () {
     var update = function (city, unit) {
         database.getWeatherInfo(city, unit, DOM.displayData, DOM.displayError);
 
+        setTimeout(() => {
+            myMapChange();
+        }, 200);
     };
 
     var bindEvents = function () {

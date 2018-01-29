@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <!-- GOOGLE FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Cabin:600" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Cabin:600" rel="stylesheet"> -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:300" rel="stylesheet">
     <!-- BOOTSTRAP FILE -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -21,7 +21,6 @@
     <!-- WEATHER ICONS FILE -->
     <link rel="stylesheet" href="css/weather-icons.min.css">
     <link rel="stylesheet" href="js/jquery-ui.min.css">
-
 </head>
 
 <body>
@@ -52,7 +51,7 @@
                         <div class="input-group">
                             <input class="form-control search" type="text" placeholder="Search for city...">
                             <span class="input-group-btn">
-                                <button class="btn btn-primary button" type="submit">
+                                <button class="btn btn-primary button" type="submit" onclick="myMapChange()">
                                     <span class="glyphicon glyphicon-search"></span>
                                 </button>
                             </span>
@@ -113,21 +112,25 @@
                                     <li>Highest:
                                         <span class="temp_max"></span>&deg;
                                     </li>
-                                    <li>Lowest:
-                                        <span class="temp_min"></span>&deg;
-                                    </li>
                                     <li>Sunrise:
                                         <span class="sunrise"></span>
                                     </li>
                                     <li>Sunset:
                                         <span class="sunset"></span>
                                     </li>
+
+                                    <li>lon:
+                                        <span id="lon" class="lon"></span>
+                                    </li>
+                                    <li>lat:
+                                        <span id="lat" class="lat"></span>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="col-xs-6">
                                 <ul class='list-unstyled'>
-                                    <li>Wind Speed:
-                                        <span class="speed"></span>m/s
+                                    <li>Lowest:
+                                        <span class="temp_min"></span>&deg;
                                     </li>
                                     <li>Cloudliness:
                                         <span class="clouds"></span>%
@@ -138,12 +141,19 @@
                                     <li>Pressure:
                                         <span class="pressure"></span>mb
                                     </li>
+                                    <li>Wind Speed:
+                                        <span class="speed"></span>m/s
+                                    </li>
+
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-3 col-xs-offset-5 favorite-cities">
+                <div class='col-xs-4'>
+                    <div id="googleMap" class="map-details"></div>
+                </div>
+                <div class="col-xs-3  favorite-cities">
                     <p class="head-section-title">FAVORITES</p>
                     <ul class='list-unstyled'>
                         <a class="fav-cities-list" href='#'>
@@ -200,5 +210,30 @@
 
     <script src="js/main.js"></script>
 </body>
+<script>
+    function myMap() {
+
+        var mapProp = {
+            center: new google.maps.LatLng(42.7, 23.32),
+            zoom: 13,
+        };
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+    }
+</script>
+<script>
+    function myMapChange() {
+        var lon = $("#lon").text();
+        var lat = $("#lat").text();
+        $('#results').text(lon);
+        var mapProp = {
+            center: new google.maps.LatLng(lat, lon),
+            zoom: 10,
+        };
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+    }
+</script>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkUlIYkH9OJ-loM6ADhmojHM6Ve7yHaSw&callback=myMap"></script>
 
 </html>

@@ -1,4 +1,5 @@
 /* GLOBAL */
+
 body {
     height: 2500px;
     background: rgb(232, 229, 245);
@@ -13,21 +14,89 @@ body {
     color: rgb(80, 83, 85);
 }
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
     border: 0;
 }
 
@@ -35,7 +104,9 @@ time, mark, audio, video {
     display: block;
 }
 
+
 /*=============== HEADER ===============*/
+
 header {
     background: #5A6571;
     /* border-bottom: 2px solid #FD9308; */
@@ -69,7 +140,7 @@ header img {
     height: 50px;
 }
 
-header .nav{
+header .nav {
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -79,12 +150,14 @@ header .nav ul {
     margin-right: 20px;
 }
 
-header .nav li { 
+header .nav li {
     padding: 0 20px;
     border-right: 1px solid #FD9308;
 }
 
-header .nav li:last-child { border-right: 0; }
+header .nav li:last-child {
+    border-right: 0;
+}
 
 header .nav a {
     color: #E5E8ED;
@@ -94,22 +167,36 @@ header .nav a {
     /* font-weight: bold; */
 }
 
+
 /*=============== PARALLAX BACKGROUND ===============*/
+
 .parallax {
     height: 700px;
     position: relative;
     background-image: url('../img/sunny.jpeg');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover; /* ebasi qkoto neshto! */
+    background-size: cover;
+    /* ebasi qkoto neshto! */
     background-attachment: fixed;
 }
 
+
 /*=============== CONTENT ===============*/
 
+
 /* ROUND TOGGLE SWITCH BUTTON */
-.toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
-.toggle.ios .toggle-handle { border-radius: 20px; }
+
+.toggle.ios,
+.toggle-on.ios,
+.toggle-off.ios {
+    border-radius: 20px;
+}
+
+.toggle.ios .toggle-handle {
+    border-radius: 20px;
+}
+
 
 /* MAIN CONTENT */
 
@@ -124,6 +211,7 @@ header .nav a {
     background: rgba(229, 232, 237, 0.9);
     border-radius: 5px;
 }
+
 .main-content .main .city-name {
     font-family: 'Cabin', sans-serif;
     letter-spacing: 1px;
@@ -131,7 +219,7 @@ header .nav a {
     color: rgb(80, 83, 85);
 }
 
-.main-content .main .country-name { 
+.main-content .main .country-name {
     color: rgb(80, 83, 85);
     padding-left: 15px;
 }
@@ -153,13 +241,18 @@ header .nav a {
     color: rgb(80, 83, 85);
 }
 
-.main-content .main .main-weather-section { margin-top: 30px; }
+.main-content .main .main-weather-section {
+    margin-top: 30px;
+}
+
 .main-content .main .main-weather-section-below p {
     color: rgb(80, 83, 85);
     font-size: 18px;
 }
 
-/* WEATHER DETAILS  */ 
+
+/* WEATHER DETAILS  */
+
 .weather-details {
     margin-top: 3%;
     padding: 13px;
@@ -182,7 +275,9 @@ header .nav a {
     font-family: 'Cabin', sans-serif;
 }
 
+
 /* FAVORITE CITIES */
+
 .main-content .favorite-cities {
     padding: 10px 13px;
     background: rgba(229, 232, 237, 0.9);
@@ -211,11 +306,18 @@ header .nav a {
     border-left: 3px solid #FD9308;
 }
 
-.main-content .fav-cities-list:hover .cross i { display: flex; }
+.main-content .fav-cities-list:hover .cross i {
+    display: flex;
+}
 
 .main-content .fav-cities-list .cross i {
     font-size: 18px;
     color: rgb(139, 139, 139);
     padding: 4px;
-    display: none;    
+    display: none;
+}
+
+.map-details {
+    width: 100%;
+    height: 500px;
 }
