@@ -1,16 +1,16 @@
-var database = (function () {
+var database = (function() {
     var citiesList = [];
 
-    var _addInCitiesList = function (data) {
-        $(data["values"]).each(function (index, elem) {
+    var _addInCitiesList = function(data) {
+        $(data["values"]).each(function(index, elem) {
             citiesList.push(elem);
         });
     }
-    var _getAllCities = (function () {
+    var _getAllCities = (function() {
         $.getJSON("cities.json", _addInCitiesList);
     })();
 
-    var _flattenObject = function (ob) {
+    var _flattenObject = function(ob) {
         var toReturn = {};
 
         for (var i in ob) {
@@ -30,13 +30,13 @@ var database = (function () {
         return toReturn;
     };
 
-    var getWeatherInfo = function (city, unit, successCallback, failCallback) {
+    var getWeatherInfo = function(city, unit, successCallback, failCallback) {
         var un = unit || "metric";
         var url = "http://api.openweathermap.org/data/2.5/weather?q=" + city +
             "&appid=b566e35c1181791b83b9aefcbe9be910&units=" + un;
 
         function makeRequest() {
-            var promise = new Promise(function (resolve, reject) {
+            var promise = new Promise(function(resolve, reject) {
                 $.ajax({
                     url: url,
                     datatype: "application/json",
@@ -48,7 +48,7 @@ var database = (function () {
         }
         // makeRequest().done(successCallback(data));
         // makeRequest().fail(failCallback());
-        makeRequest().then(function (data) {
+        makeRequest().then(function(data) {
             console.log(data)
             data = _flattenObject(data);
             successCallback(data);
@@ -56,7 +56,7 @@ var database = (function () {
 
         });
 
-        makeRequest().catch(function () {
+        makeRequest().catch(function() {
             failCallback();
 
         });
@@ -69,9 +69,9 @@ var database = (function () {
 
 })();
 
-var DOM = (function () {
+var DOM = (function() {
 
-    var displayData = function (obj) {
+    var displayData = function(obj) {
         // if ($(".content").hasClass('hidden')) {
         //     $(".content").removeClass('hidden');
         //     $(".error").remove();
@@ -125,10 +125,10 @@ var DOM = (function () {
     }
 })();
 
-var app = (function () {
+var app = (function() {
     var unit = "metric";
 
-    var update = function (city, unit) {
+    var update = function(city, unit) {
         database.getWeatherInfo(city, unit, DOM.displayData, DOM.displayError);
 
         setTimeout(() => {
@@ -136,16 +136,16 @@ var app = (function () {
         }, 200);
     };
 
-    var bindEvents = function () {
-        $(".button").on('click', function (e) {
+    var bindEvents = function() {
+        $(".button").on('click', function(e) {
             e.preventDefault();
             var value = $(".search").val();
             update(value, unit)
         });
 
         $(".search").autocomplete({
-            source: function (request, response) {
-                var matches = $.map(database.citiesList, function (acItem) {
+            source: function(request, response) {
+                var matches = $.map(database.citiesList, function(acItem) {
                     if (acItem.toUpperCase().indexOf(request.term.toUpperCase()) ===
                         0) {
                         return acItem;
@@ -153,7 +153,7 @@ var app = (function () {
                 });
                 response(matches);
             },
-            select: function (event, ui) {
+            select: function(event, ui) {
                 update(ui.item.value, unit);
             }
 
@@ -161,15 +161,15 @@ var app = (function () {
 
     }
 
-    var setUnit = function (newUnit) {
+    var setUnit = function(newUnit) {
         unit = newUnit;
     }
 
-    var getUnit = function () {
+    var getUnit = function() {
         return unit;
     }
 
-    var init = function () {
+    var init = function() {
         bindEvents();
 
         update("Sofia", unit)
@@ -182,6 +182,6 @@ var app = (function () {
     }
 })();
 
-$(document).ready(function () {
+$(document).ready(function() {
     app.init();
 });
