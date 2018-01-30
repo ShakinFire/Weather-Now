@@ -1,13 +1,24 @@
 var database = (function () {
     var citiesList = [];
 
-    var _addInCitiesList = function (data) {
-        $(data["values"]).each(function (index, elem) {
-            citiesList.push(elem);
-        });
+    var getRequest = function (url) {
+        var promise = new Promise(function (resolve, reject) {
+            $.ajax({
+                url: url,
+                datatype: "application/json",
+                success: resolve,
+                error: reject
+            });
+        })
+        return promise;
     }
+
     var _getAllCities = (function () {
-        $.getJSON("cities.json", _addInCitiesList);
+        getRequest("cities.json").then(function (data) {
+            $(data["values"]).each(function (index, elem) {
+                citiesList.push(elem);
+            });
+        })
     })();
 
     var _flattenObject = function (ob) {
@@ -30,6 +41,8 @@ var database = (function () {
         return toReturn;
     };
 
+
+
     var getWeatherInfo = function (place, unit, successCallback, failCallback) {
         var un = unit || "metric";
         var url = "";
@@ -45,25 +58,14 @@ var database = (function () {
             console.log(url);
         }
 
-        function makeRequest() {
-            var promise = new Promise(function (resolve, reject) {
-                $.ajax({
-                    url: url,
-                    datatype: "application/json",
-                    success: resolve,
-                    error: reject
-                });
-            })
-            return promise;
-        }
-        makeRequest().then(function (data) {
+        getRequest(url).then(function (data) {
             data = _flattenObject(data);
             successCallback(data);
             console.log(data)
 
         });
 
-        makeRequest().catch(function () {
+        getRequest(url).catch(function () {
             failCallback();
 
         });
@@ -87,50 +89,34 @@ var database = (function () {
         getWeatherInfo,
         getLocation,
     }
-
 })();
 
 var DOM = (function () {
-
-    var _changeIcon = function (name) {
+    var _changeIcon = function (name, time) {
         var defaultClass = "wi weather-icon";
         var _changeClass = function (newClass) {
             $("#icon").removeClass();
             $("#icon").addClass(defaultClass);
             $("#icon").addClass(newClass);
         }
-        switch (name) {
-            case "Thunderstorm":
-                newClass = "wi-day-snow-thunderstorm"
-                break;
-            case "Clouds":
-                newClass = "wi-cloud"
-                break;
-            case "Drizzle":
-                newClass = "wi-day-cloudy"
-                break;
-            case "Rain":
-                newClass = "wi-rain"
-                break;
-            case "Snow":
-                newClass = "wi-snowflake-cold"
-                break;
-            case "Clear":
-                newClass = "wi-day-sunny"
-                break;
-            case "Extreme":
-                newClass = "wi-thunderstorm"
-                break;
-            case "Mist":
-                newClass = "wi-fog"
-                break;
-            case "Fog":
-                newClass = "wi-fog"
-                break;
-
-            default:
-                newClass = "wi-cloud"
-                break;
+        if (name === "Thunderstorm") {
+            newClass = "wi-day-snow-thunderstorm"
+        } else if (name === 'Clouds') {
+            newClass = "wi-cloud"
+        } else if (name === "Drizzle") {
+            newClass = "wi-night-showers"
+        } else if (name === "Rain") {
+            newClass = "wi-rain"
+        } else if (name === "Snow") {
+            newClass = "wi-snowflake-cold"
+        } else if (name === "Clear" && time === "d") {
+            newClass = "wi-day-sunny"
+        } else if (name === "Clear" && time === "n") {
+            newClass = "wi-night-clear"
+        } else if (name === "Extreme") {
+            newClass = "wi-thunderstorm"
+        } else if (name === "Mist" || name === "Fog") {
+            newClass = "wi-fog"
         }
 
         _changeClass(newClass);
@@ -146,13 +132,11 @@ var DOM = (function () {
     }
 
     var displayData = function (obj) {
-
         $('.city-name').text(obj.name);
         $('.country-name').text(obj.country);
         $('.main-description').text(obj.main);
         $('.temp').text(Math.round(obj.temp));
         $('.description').text(obj.description);
-        _changeIcon(obj.main) //changing the icon accordingly
         $('.temp_max').text(obj.temp_max);
         $('.temp_min').text(obj.temp_min);
         $('.sunrise').text(_convertFromUnixTimeStamp(obj.sunrise));
@@ -164,16 +148,18 @@ var DOM = (function () {
 
         $('.lat').text(obj.lat);
         $('.lon').text(obj.lon);
+
         let iconName = obj.icon
         let time = iconName[iconName.length - 1];
         if (time === 'd') {
             $('.parallax').css('background-image', 'url("img/daysky.jpg")');
         } else {
             $('.parallax').css('background-image', 'url("img/nightsky.jpg")');
-
         }
 
-        myMapChange()
+        _changeIcon(obj.main, time) //changing the icon accordingly
+
+            myMapChange()
     };
 
     var displayError = function () {
@@ -204,9 +190,9 @@ var app = (function () {
         };
         database.getWeatherInfo(cityObj, unit, DOM.displayData, DOM.displayError);
         currentCity = cityName;
-        setTimeout(() => {
-            myMapChange();
-        }, 400);
+        // setTimeout(() => {
+        //     myMapChange();
+        // }, 400);
     };
 
     var bindEvents = function () {
@@ -229,7 +215,6 @@ var app = (function () {
             select: function (event, ui) {
                 update(ui.item.value, unit);
             }
-
         });
 
         $('#toggle').change(function () {
@@ -239,18 +224,12 @@ var app = (function () {
                 setUnit("fahrenheit")
             }
 
-            update(currentCity, unit);
+            update(currentCity, unit, false);
         });
-
-
     }
 
     var setUnit = function (newUnit) {
         unit = newUnit;
-    }
-
-    var getUnit = function () {
-        return unit;
     }
 
     var init = function () {
@@ -262,7 +241,6 @@ var app = (function () {
 
     return {
         init,
-        getUnit,
         setUnit,
     }
 })();
