@@ -30,10 +30,20 @@ var database = (function () {
         return toReturn;
     };
 
-    var getWeatherInfo = function (city, unit, successCallback, failCallback) {
+    var getWeatherInfo = function (place, unit, successCallback, failCallback) {
         var un = unit || "metric";
-        var url = "http://api.openweathermap.org/data/2.5/weather?q=" + city +
-            "&appid=b566e35c1181791b83b9aefcbe9be910&units=" + un;
+        var url = "";
+        if (place.hasOwnProperty("city")) {
+            console.log(place)
+            var city = place.city;;
+            url = "http://api.openweathermap.org/data/2.5/weather?q=" + city +
+                "&appid=b566e35c1181791b83b9aefcbe9be910&units=" + un;
+        } else if (place.hasOwnProperty("lat")) {
+            var lat = place.lat;
+            var lon = place.lon;
+            url = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=b566e35c1181791b83b9aefcbe9be910&units=" + un;
+            console.log(url);
+        }
 
         function makeRequest() {
             var promise = new Promise(function (resolve, reject) {
@@ -46,8 +56,6 @@ var database = (function () {
             })
             return promise;
         }
-        // makeRequest().done(successCallback(data));
-        // makeRequest().fail(failCallback());
         makeRequest().then(function (data) {
             console.log(data)
             data = _flattenObject(data);
@@ -62,16 +70,28 @@ var database = (function () {
         });
     }
 
+    var getLocation = function (unit, successCallback, failCallback) {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var locObj = {};
+                locObj.lat = position.coords.latitude
+                locObj.lon = position.coords.longitude;
+                getWeatherInfo(locObj, unit, successCallback, failCallback);
+            });
+        } else {
+            return "Geolocation is not supported by this browser.";
+        }
+    }
+
     return {
         citiesList,
-        getWeatherInfo
+        getWeatherInfo,
+        getLocation,
     }
 
 })();
 
 var DOM = (function () {
-
-
 
     var _changeIcon = function (name) {
         var defaultClass = "wi weather-icon";
@@ -161,6 +181,8 @@ var DOM = (function () {
         //     var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
         // }
 
+        myMapChange()
+
     };
 
     var displayError = function () {
@@ -180,9 +202,18 @@ var app = (function () {
     var unit = "metric";
     var currentCity = "";
 
-    var update = function (city, unit) {
-        database.getWeatherInfo(city, unit, DOM.displayData, DOM.displayError);
-        currentCity = city;
+    var boot = function (unit) {
+        update("London", unit)
+        database.getLocation(unit, DOM.displayData, function(){
+        });
+    }
+
+    var update = function (cityName, unit) {
+        let cityObj = {
+            city: cityName
+        };
+        database.getWeatherInfo(cityObj, unit, DOM.displayData, DOM.displayError);
+        currentCity = cityName;
         setTimeout(() => {
             myMapChange();
         }, 400);
@@ -212,7 +243,7 @@ var app = (function () {
         });
 
         $('#toggle').change(function () {
-            if($(this).prop('checked')) {
+            if ($(this).prop('checked')) {
                 setUnit("metric")
             } else {
                 setUnit("fahrenheit")
@@ -234,8 +265,9 @@ var app = (function () {
 
     var init = function () {
         bindEvents();
+        boot();
+        // update("Sofia", unit)
 
-        update("Sofia", unit)
     }
 
     return {
