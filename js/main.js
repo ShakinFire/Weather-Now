@@ -174,12 +174,15 @@ var DOM = (function () {
     }
 })();
 
+
+
 var app = (function () {
     var unit = "metric";
+    var currentCity = "";
 
     var update = function (city, unit) {
         database.getWeatherInfo(city, unit, DOM.displayData, DOM.displayError);
-
+        currentCity = city;
         setTimeout(() => {
             myMapChange();
         }, 400);
@@ -207,6 +210,17 @@ var app = (function () {
             }
 
         });
+
+        $('#toggle').change(function () {
+            if($(this).prop('checked')) {
+                setUnit("metric")
+            } else {
+                setUnit("fahrenheit")
+            }
+
+            update(currentCity, unit);
+        });
+
 
     }
 
