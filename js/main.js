@@ -92,6 +92,8 @@ var database = (function () {
 })();
 
 var DOM = (function () {
+    var currentCityName = $(".city-name").text();;
+
     var _changeIcon = function (name, time) {
         var defaultClass = "wi weather-icon";
         var _changeClass = function (newClass) {
@@ -158,8 +160,7 @@ var DOM = (function () {
         }
 
         _changeIcon(obj.main, time) //changing the icon accordingly
-
-            myMapChange()
+        myMapChange()
     };
 
     var displayError = function () {
@@ -169,7 +170,8 @@ var DOM = (function () {
 
     return {
         displayData,
-        displayError
+        displayError,
+        currentCityName,
     }
 })();
 
@@ -182,6 +184,8 @@ var app = (function () {
     var boot = function (unit) {
         update("London", unit)
         database.getLocation(unit, DOM.displayData, function () {});
+        currentCity = DOM.currentCityName;
+        console.log(DOM.cityName)
     }
 
     var update = function (cityName, unit) {
@@ -190,9 +194,6 @@ var app = (function () {
         };
         database.getWeatherInfo(cityObj, unit, DOM.displayData, DOM.displayError);
         currentCity = cityName;
-        // setTimeout(() => {
-        //     myMapChange();
-        // }, 400);
     };
 
     var bindEvents = function () {
@@ -223,7 +224,6 @@ var app = (function () {
             } else {
                 setUnit("fahrenheit")
             }
-
             update(currentCity, unit, false);
         });
     }
