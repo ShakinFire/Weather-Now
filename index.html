@@ -25,7 +25,18 @@
 </head>
 
 <body>
-
+<div class="wrapper">
+    <div class="error-message-container">
+        <div class="error-message-screen col-xs-offset-3 col-xs-6 col-lg-offset-4 col-lg-4">
+            <div class="head-section-title">
+                <p>Error Message<a class="close-error" href="#"><i class='fa fa-times' aria-hidden='true'></i></a></p>
+            </div>
+            <div class="error-message">
+                <p class="error-message-text"></p>
+            </div>
+        </div>
+    </div>
+</div>
     <!-- HEADER -->
     <header>
         <div class="container">
@@ -34,7 +45,7 @@
                     <img src="img/image-white.png">
                     <h1>WeatherEarth</h1>
                 </div>
-                <div class="col-xs-4 col-xs-offset-2 nav">
+                <div class="col-xs-4 col-xs-offset-1 nav">
                     <ul class="list-inline">
                         <li>
                             <a href="#">GALLERY</a>
@@ -59,6 +70,10 @@
                         </div>
                     </form>
                 </div>
+                <div class="col-xs-1">
+                    <input type="checkbox" data-size="small" data-on="&deg;C" data-off="&deg;F" data-onstyle="primary" data-offstyle="warning" checked
+                    data-toggle="toggle" data-style="ios">
+                </div>
             </div>
         </div>
     </header>
@@ -76,11 +91,7 @@
                                 <h1 class="city-name">Sofia</h1>
                                 <h4 class="country-name">Bulgaria</h4>
                             </div>
-                            <div class="col-xs-2">
-                                <input type="checkbox" data-size="mini" data-on="&deg;C" data-off="&deg;F" data-onstyle="warning" data-offstyle="info" checked
-                                    data-toggle="toggle" data-style="ios">
-                            </div>
-                            <div class="col-xs-2">
+                            <div class="col-xs-4">
                                 <a id="add-city" href="#"><i class="fa fa-plus-circle plus-icon" aria-hidden="true"></i></a>
                             </div>
                         </div>
@@ -99,7 +110,7 @@
                                     <span class="temp"></span>&deg;</p>
                             </div>
                             <div class="col-xs-5 col-xs-offset-2">
-                                <p>
+                                <p class="weather-descr">
                                     <span class="main-description"></span>
                                 </p>
                             </div>
