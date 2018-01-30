@@ -57,7 +57,6 @@ var database = (function () {
             return promise;
         }
         makeRequest().then(function (data) {
-            console.log(data)
             data = _flattenObject(data);
             successCallback(data);
             console.log(data)
@@ -99,8 +98,6 @@ var DOM = (function () {
             $("#icon").removeClass();
             $("#icon").addClass(defaultClass);
             $("#icon").addClass(newClass);
-
-
         }
         switch (name) {
             case "Thunderstorm":
@@ -140,18 +137,16 @@ var DOM = (function () {
 
     }
 
+    function _convertFromUnixTimeStamp(t) {
+        var dt = new Date(t * 1000);
+        var hr = dt.getHours();
+        var m = "0" + dt.getMinutes();
+        var s = "0" + dt.getSeconds();
+        return hr + ':' + m.substr(-2) + ':' + s.substr(-2);
+    }
+
     var displayData = function (obj) {
-        // if ($(".content").hasClass('hidden')) {
-        //     $(".content").removeClass('hidden');
-        //     $(".error").remove();
-        // }
-        function _convertFromUnixTimeStamp(t) {
-            var dt = new Date(t * 1000);
-            var hr = dt.getHours();
-            var m = "0" + dt.getMinutes();
-            var s = "0" + dt.getSeconds();
-            return hr + ':' + m.substr(-2) + ':' + s.substr(-2);
-        }
+
         $('.city-name').text(obj.name);
         $('.country-name').text(obj.country);
         $('.main-description').text(obj.main);
@@ -169,20 +164,16 @@ var DOM = (function () {
 
         $('.lat').text(obj.lat);
         $('.lon').text(obj.lon);
+        let iconName = obj.icon
+        let time = iconName[iconName.length - 1];
+        if (time === 'd') {
+            $('.parallax').css('background-image', 'url("img/daysky.jpg")');
+        } else {
+            $('.parallax').css('background-image', 'url("img/nightsky.jpg")');
 
-        var lat = obj.lat;
-        var lon = obj.lon;
-        // function myMap() {
-
-        //     var mapProp = {
-        //         center: new google.maps.LatLng(obj.lat, obj.lon),
-        //         zoom: 13,
-        //     };
-        //     var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-        // }
+        }
 
         myMapChange()
-
     };
 
     var displayError = function () {
@@ -204,8 +195,7 @@ var app = (function () {
 
     var boot = function (unit) {
         update("London", unit)
-        database.getLocation(unit, DOM.displayData, function(){
-        });
+        database.getLocation(unit, DOM.displayData, function () {});
     }
 
     var update = function (cityName, unit) {
@@ -283,25 +273,25 @@ $(document).ready(function () {
 
 // Implementing add and delete favorite city functionality
 
-var errorScreen = function(errorText) {
+var errorScreen = function (errorText) {
     $(".error-message-text").text(errorText); // Pop up error screen with the provided error text
     $(".wrapper").css("display", "block");
 
-    $(".close-error").on("click", function() { // 'hide' the error message when click on 'X' button
+    $(".close-error").on("click", function () { // 'hide' the error message when click on 'X' button
         $(".wrapper").css("display", "none");
     });
 
-    $(".error-message-container").on("click", function(e) { // Fire an event when you click outside the box to 'hide' the error message
+    $(".error-message-container").on("click", function (e) { // Fire an event when you click outside the box to 'hide' the error message
         $(".wrapper").css("display", "none");
     });
 
-    $(".error-message-screen").on("click", function(e) { // Stop the event from firing on the error message screen
+    $(".error-message-screen").on("click", function (e) { // Stop the event from firing on the error message screen
         e.stopPropagation();
     });
 }
 
-$(function(){
-    var checkExistingName = function(cityToCheck) { // check the whole favorite list in local storage for same name
+$(function () {
+    var checkExistingName = function (cityToCheck) { // check the whole favorite list in local storage for same name
         var initialFavorites = JSON.parse(localStorage.getItem("favorites"));
         var isChecked = false;
         initialFavorites.forEach((val) => {
@@ -312,7 +302,7 @@ $(function(){
         return isChecked;
     }
 
-    var generateFavoriteCities = function() { // Every refresh generate the local storage list of favorite cities
+    var generateFavoriteCities = function () { // Every refresh generate the local storage list of favorite cities
         var initialFavorites = JSON.parse(localStorage.getItem("favorites"));
         initialFavorites.forEach((val) => {
             var placeHolder = `<a class='fav-cities-list' href='#'>
@@ -322,7 +312,7 @@ $(function(){
             </span>
             </a>`;
             $("#ul-fav-cities").append(placeHolder);
-        });      
+        });
     }
 
     if (localStorage.length === 0) { // checks if there is already modified local storage, if not, set the default cities
@@ -332,7 +322,7 @@ $(function(){
     }
     generateFavoriteCities();
 
-    var deleteItem = function(deletedCity) { // Deleting city from local storage
+    var deleteItem = function (deletedCity) { // Deleting city from local storage
         var initialFavorites = JSON.parse(localStorage.getItem("favorites"));
         for (let i = 0; i < initialFavorites.length; i += 1) {
             if (initialFavorites[i] === deletedCity) {
@@ -344,14 +334,14 @@ $(function(){
         localStorage.setItem("favorites", JSON.stringify(initialFavorites));
     }
 
-    var addCity = function(addedCity) { // Add city in local storage
+    var addCity = function (addedCity) { // Add city in local storage
         var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
         currentFavorites.push(addedCity);
         localStorage.setItem("favorites", JSON.stringify(currentFavorites));
         currentFavorites = JSON.parse(localStorage.getItem("favorites"));
     }
 
-    $("#add-city").on("click", function() { // append the whole fragment for favorite city
+    $("#add-city").on("click", function () { // append the whole fragment for favorite city
         var $cityName = $(".city-name").text();
         if (checkExistingName($cityName)) {
             errorScreen("This city is already in your favorite list!");
@@ -367,14 +357,14 @@ $(function(){
         }
     });
 
-    $(document).on("click", ".cross", function(e) { // detach the whole fragment for favorite city
+    $(document).on("click", ".cross", function (e) { // detach the whole fragment for favorite city
         var name = $(this).prev().text();
         $(this).parent().css("display", "none");
         deleteItem(name);
         e.stopPropagation();
     });
 
-    $(document).on("click", ".fav-cities-list", function() { // When clicked on city in the favorite list, refresh the weather-info for this city
+    $(document).on("click", ".fav-cities-list", function () { // When clicked on city in the favorite list, refresh the weather-info for this city
         var a = $(this).children("li").text();
         console.log(a); // TODO attach it to the module
     });
