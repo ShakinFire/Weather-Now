@@ -280,3 +280,102 @@ var app = (function () {
 $(document).ready(function () {
     app.init();
 });
+
+// Implementing add and delete favorite city functionality
+
+var errorScreen = function(errorText) {
+    $(".error-message-text").text(errorText); // Pop up error screen with the provided error text
+    $(".wrapper").css("display", "block");
+
+    $(".close-error").on("click", function() { // 'hide' the error message when click on 'X' button
+        $(".wrapper").css("display", "none");
+    });
+
+    $(".error-message-container").on("click", function(e) { // Fire an event when you click outside the box to 'hide' the error message
+        $(".wrapper").css("display", "none");
+    });
+
+    $(".error-message-screen").on("click", function(e) { // Stop the event from firing on the error message screen
+        e.stopPropagation();
+    });
+}
+
+$(function(){
+    var checkExistingName = function(cityToCheck) { // check the whole favorite list in local storage for same name
+        var initialFavorites = JSON.parse(localStorage.getItem("favorites"));
+        var isChecked = false;
+        initialFavorites.forEach((val) => {
+            if (cityToCheck === val) {
+                isChecked = true;
+            }
+        });
+        return isChecked;
+    }
+
+    var generateFavoriteCities = function() { // Every refresh generate the local storage list of favorite cities
+        var initialFavorites = JSON.parse(localStorage.getItem("favorites"));
+        initialFavorites.forEach((val) => {
+            var placeHolder = `<a class='fav-cities-list' href='#'>
+            <li>` + val + `</li>
+            <span class='cross'>
+                <i class='fa fa-times' aria-hidden='true'></i>
+            </span>
+            </a>`;
+            $("#ul-fav-cities").append(placeHolder);
+        });      
+    }
+
+    if (localStorage.length === 0) { // checks if there is already modified local storage, if not, set the default cities
+        var holdDefault = ['Varna', 'Sofia', 'Vidin', 'Burgas'];
+        localStorage.setItem("favorites", JSON.stringify(holdDefault));
+        var initialFavorites = JSON.parse(localStorage.getItem("favorites"));
+    }
+    generateFavoriteCities();
+
+    var deleteItem = function(deletedCity) { // Deleting city from local storage
+        var initialFavorites = JSON.parse(localStorage.getItem("favorites"));
+        for (let i = 0; i < initialFavorites.length; i += 1) {
+            if (initialFavorites[i] === deletedCity) {
+                initialFavorites.splice(i, 1);
+                break;
+            }
+        }
+
+        localStorage.setItem("favorites", JSON.stringify(initialFavorites));
+    }
+
+    var addCity = function(addedCity) { // Add city in local storage
+        var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
+        currentFavorites.push(addedCity);
+        localStorage.setItem("favorites", JSON.stringify(currentFavorites));
+        currentFavorites = JSON.parse(localStorage.getItem("favorites"));
+    }
+
+    $("#add-city").on("click", function() { // append the whole fragment for favorite city
+        var $cityName = $(".city-name").text();
+        if (checkExistingName($cityName)) {
+            errorScreen("This city is already in your favorite list!");
+        } else {
+            var placeHolder = `<a class='fav-cities-list' href='#'>
+            <li>` + $cityName + `</li>
+            <span class='cross'>
+                <i class='fa fa-times' aria-hidden='true'></i>
+            </span>
+            </a>`;
+            $("#ul-fav-cities").append(placeHolder);
+            addCity($cityName);
+        }
+    });
+
+    $(document).on("click", ".cross", function(e) { // detach the whole fragment for favorite city
+        var name = $(this).prev().text();
+        $(this).parent().css("display", "none");
+        deleteItem(name);
+        e.stopPropagation();
+    });
+
+    $(document).on("click", ".fav-cities-list", function() { // When clicked on city in the favorite list, refresh the weather-info for this city
+        var a = $(this).children("li").text();
+        console.log(a); // TODO attach it to the module
+    });
+});

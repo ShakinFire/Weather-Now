@@ -104,6 +104,44 @@ video {
     display: block;
 }
 
+/*=============== ERROR SCREEN ===============*/
+.wrapper { display: none; }
+.error-message-container {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.8);
+    height: 100%;
+    width: 100%;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    
+}
+
+.error-message-screen {
+    position: relative;
+    background: rgb(229, 232, 237);
+    border-radius: 7px;
+    padding: 10px;
+}
+.error-message-screen .head-section-title { font-size: 20px; }
+
+.error-message-screen .close-error:hover { color: rgb(80, 83, 85); }
+.error-message-screen .close-error {
+    font-size: 25px;
+    padding: 0 10px;
+    color: rgb(131, 129, 127);
+    position: absolute;
+    top: 7px;
+    right: 15px;
+}
+
+.error-message-screen .error-message {
+    font-size: 17px;
+    text-align: center;
+    padding-bottom: 5px;
+    font-family: 'Nunito', sans-serif;    
+}
+
 
 /*=============== HEADER ===============*/
 
@@ -164,7 +202,7 @@ header .nav a {
     text-decoration: none;
     font-size: 13px;
     letter-spacing: 1px;
-    /* font-weight: bold; */
+    font-family: 'Cabin', sans-serif;
 }
 
 
@@ -231,8 +269,12 @@ header .nav a {
 }
 
 .main-content .main .plus-icon {
-    font-size: 25px;
+    font-size: 45px;
     color: #FD9308;
+}
+
+.main-content .main .plus-icon:hover {
+    color: rgb(255, 115, 0);
 }
 
 .main-content .main .cel-far {
@@ -241,24 +283,20 @@ header .nav a {
     color: rgb(80, 83, 85);
 }
 
-.main-content .main .main-weather-section {
-    margin-top: 30px;
-}
+.weather-descr { padding-left: 22px; }
+.main-content .main .main-weather-section { margin-top: 30px; }
 
 .main-content .main .main-weather-section-below p {
     color: rgb(80, 83, 85);
     font-size: 18px;
 }
 
-
-/* WEATHER DETAILS  */
-
+/* WEATHER DETAILS */
 .weather-details {
     margin-top: 3%;
     padding: 13px;
     background: rgba(229, 232, 237, 0.9);
     border-radius: 5px;
-    font-family: 'Cabin', sans-serif;
 }
 
 .weather-details .row li {
@@ -269,11 +307,11 @@ header .nav a {
     font-family: 'Nunito', sans-serif;
 }
 
-.weather-details span {
+.weather-details .weather-values {
     padding-left: 10px;
     color: rgb(80, 83, 85);
-    font-family: 'Cabin', sans-serif;
 }
+.weather-details span{ font-family: 'Cabin', sans-serif; }
 
 
 /* FAVORITE CITIES */
@@ -282,6 +320,8 @@ header .nav a {
     padding: 10px 13px;
     background: rgba(229, 232, 237, 0.9);
     border-radius: 5px;
+    max-height: 555px;
+    overflow: hidden;
 }
 
 .main-content .fav-cities-list {
@@ -297,8 +337,8 @@ header .nav a {
 
 .main-content .favorite-cities li {
     color: rgb(80, 83, 85);
-    font-size: 22px;
-    font-family: Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 19px;
+    font-family: 'Nunito', sans-serif;
 }
 
 .main-content .fav-cities-list:hover {

@@ -24,7 +24,18 @@
 </head>
 
 <body>
-
+<div class="wrapper">
+    <div class="error-message-container">
+        <div class="error-message-screen col-xs-offset-3 col-xs-6 col-lg-offset-4 col-lg-4">
+            <div class="head-section-title">
+                <p>Error Message<a class="close-error" href="#"><i class='fa fa-times' aria-hidden='true'></i></a></p>
+            </div>
+            <div class="error-message">
+                <p class="error-message-text"></p>
+            </div>
+        </div>
+    </div>
+</div>
     <!-- HEADER -->
     <header>
         <div class="container">
@@ -33,7 +44,7 @@
                     <img src="img/image-white.png">
                     <h1>WeatherEarth</h1>
                 </div>
-                <div class="col-xs-4 col-xs-offset-2 nav">
+                <div class="col-xs-4 col-xs-offset-1 nav">
                     <ul class="list-inline">
                         <li>
                             <a href="#">GALLERY</a>
@@ -58,6 +69,10 @@
                         </div>
                     </form>
                 </div>
+                <div class="col-xs-1">
+                    <input type="checkbox" data-size="small" data-on="&deg;C" data-off="&deg;F" data-onstyle="primary" data-offstyle="warning" checked
+                    data-toggle="toggle" data-style="ios">
+                </div>
             </div>
         </div>
     </header>
@@ -75,12 +90,8 @@
                                 <h1 class="city-name">Sofia</h1>
                                 <h4 class="country-name">Bulgaria</h4>
                             </div>
-                            <div class="col-xs-2">
-                                <input id="toggle" type="checkbox" data-size="mini" data-on="&deg;C" data-off="&deg;F" data-onstyle="warning" data-offstyle="info"
-                                    checked data-toggle="toggle" data-style="ios">
-                            </div>
-                            <div class="col-xs-2">
-                                <i class="fa fa-plus-circle plus-icon" aria-hidden="true"></i>
+                            <div class="col-xs-4">
+                                <a id="add-city" href="#"><i class="fa fa-plus-circle plus-icon" aria-hidden="true"></i></a>
                             </div>
                         </div>
                         <div class="row main-weather-section">
@@ -98,12 +109,13 @@
                                     <span class="temp"></span>&deg;</p>
                             </div>
                             <div class="col-xs-5 col-xs-offset-2">
-                                <p>
+                                <p class="weather-descr">
                                     <span class="main-description"></span>
                                 </p>
                             </div>
                         </div>
                     </div>
+    <!-- WEATHER DETAILS -->
                     <div class="weather-details">
                         <p class="head-section-title">WEATHER DETAILS</p>
                         <div class='row'>
@@ -133,13 +145,13 @@
                                         <span class="temp_min"></span>&deg;
                                     </li>
                                     <li>Cloudliness:
-                                        <span class="clouds"></span>%
+                                        <span class="clouds weather-values"></span><span>%</span>
                                     </li>
                                     <li>Humidity:
-                                        <span class="humidity"></span>%
+                                        <span class="humidity weather-values"></span><span>%</span>
                                     </li>
                                     <li>Pressure:
-                                        <span class="pressure"></span>mb
+                                        <span class="pressure weather-values"></span><span>mb</span>
                                     </li>
                                     <li>Wind Speed:
                                         <span class="speed"></span>m/s
@@ -150,54 +162,15 @@
                         </div>
                     </div>
                 </div>
+
+    <!-- FAVORITE CITIES -->
+                <div class="col-xs-3 col-xs-offset-5 favorite-cities">
                 <div class='col-xs-4'>
                     <div id="googleMap" class="map-details"></div>
                 </div>
                 <div class="col-xs-3  favorite-cities">
                     <p class="head-section-title">FAVORITES</p>
-                    <ul class='list-unstyled'>
-                        <a class="fav-cities-list" href='#'>
-                            <li>London</li>
-                            <span onclick="hide()" class="cross">
-                                <i class="fa fa-times" aria-hidden="true"></i>
-                            </span>
-                        </a>
-                        <a class="fav-cities-list" href='#'>
-                            <li>New York</li>
-                            <span class="cross">
-                                <i class="fa fa-times" aria-hidden="true"></i>
-                            </span>
-                        </a>
-                        <a class="fav-cities-list" href='#'>
-                            <li>Los Angelis</li>
-                            <span class="cross">
-                                <i class="fa fa-times" aria-hidden="true"></i>
-                            </span>
-                        </a>
-                        <a class="fav-cities-list" href='#'>
-                            <li>Rome</li>
-                            <span class="cross">
-                                <i class="fa fa-times" aria-hidden="true"></i>
-                            </span>
-                        </a>
-                        <a class="fav-cities-list" href='#'>
-                            <li>Tokyo</li>
-                            <span class="cross">
-                                <i class="fa fa-times" aria-hidden="true"></i>
-                            </span>
-                        </a>
-                        <a class="fav-cities-list" href='#'>
-                            <li>Hong Kong</li>
-                            <span class="cross">
-                                <i class="fa fa-times" aria-hidden="true"></i>
-                            </span>
-                        </a>
-                        <a class="fav-cities-list" href='#'>
-                            <li>Moscow</li>
-                            <span class="cross">
-                                <i class="fa fa-times" aria-hidden="true"></i>
-                            </span>
-                        </a>
+                    <ul id="ul-fav-cities" class='list-unstyled'>
                     </ul>
                 </div>
             </div>
