@@ -240,7 +240,7 @@ header .nav a {
 
 .main-content .content {
     position: relative;
-    margin-top: 100px;
+    margin-top: 70px;
     height: 600px;
 }
 
@@ -293,7 +293,7 @@ header .nav a {
 
 /* WEATHER DETAILS */
 .weather-details {
-    margin-top: 3%;
+    margin-top: 15px;
     padding: 13px;
     background: rgba(229, 232, 237, 0.9);
     border-radius: 5px;
@@ -315,7 +315,6 @@ header .nav a {
 
 
 /* FAVORITE CITIES */
-
 .main-content .favorite-cities {
     padding: 10px 13px;
     background: rgba(229, 232, 237, 0.9);
@@ -357,7 +356,18 @@ header .nav a {
     display: none;
 }
 
+/*=============== GOOGLE MAPS ===============*/
+.google-map {
+    padding-left: 0px;
+}
+
 .map-details {
     width: 100%;
     height: 500px;
+}
+
+.google-map-box {
+    padding: 10px;
+    background: rgba(229, 232, 237, 0.9);
+    border-radius: 5px;
 }
