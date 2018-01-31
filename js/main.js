@@ -222,7 +222,7 @@ var app = (function () {
             if ($(this).prop('checked')) {
                 setUnit("metric")
             } else {
-                setUnit("fahrenheit")
+                setUnit("imperial")
             }
             update(currentCity, unit, false);
         });
@@ -267,6 +267,8 @@ var errorScreen = function (errorText) {
         e.stopPropagation();
     });
 }
+
+
 
 $(function () {
     var checkExistingName = function (cityToCheck) { // check the whole favorite list in local storage for same name
