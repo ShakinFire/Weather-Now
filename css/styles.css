@@ -1,4 +1,4 @@
-/* GLOBAL */
+/*=============== GLOBAL ===============*/
 
 body {
     height: 2500px;
@@ -14,87 +14,10 @@ body {
     color: rgb(80, 83, 85);
 }
 
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,
+code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,
+fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,
+figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video {
     margin: 0;
     padding: 0;
     border: 0;
@@ -104,9 +27,7 @@ video {
     display: block;
 }
 
-
 /*=============== ERROR SCREEN ===============*/
-
 .wrapper {
     display: none;
 }
@@ -154,7 +75,6 @@ video {
 
 
 /*=============== HEADER ===============*/
-
 header {
     background: #5A6571;
     /* border-bottom: 2px solid #FD9308; */
@@ -273,7 +193,7 @@ header .nav a {
 }
 
 .main-content .main .weather-icon {
-    font-size: 70px;
+    font-size: 68px;
     color: rgb(80, 83, 85);
     margin-top: 20px;
 }
@@ -283,29 +203,27 @@ header .nav a {
     color: #FD9308;
 }
 
-.main-content .main .plus-icon:hover {
-    color: rgb(255, 115, 0);
+.main-content .main .plus-icon-section {
+    padding-left: 0;
+    text-align: center;
 }
 
+.main-content .main .plus-icon:hover { color: rgb(255, 115, 0); }
 .main-content .main .cel-far {
     font-size: 70px;
     font-weight: bold;
     color: rgb(80, 83, 85);
 }
 
-.weather-descr {
-    padding-left: 22px;
-}
-
-.main-content .main .main-weather-section {
-    margin-top: 30px;
-}
+.weather-descr { text-align: center; }
+.main-content .main .main-weather-section { margin-top: 20px; }
+.main-content .main .weather-icon-section { text-align: center; }
 
 .main-content .main .main-weather-section-below p {
+    margin-top: 10px;
     color: rgb(80, 83, 85);
     font-size: 18px;
 }
-
 
 /* WEATHER DETAILS */
 
@@ -325,12 +243,14 @@ header .nav a {
 }
 
 .weather-details .weather-values {
-    padding-left: 10px;
+    padding-left: 7px;
     color: rgb(80, 83, 85);
+    
 }
 
 .weather-details span {
     font-family: 'Cabin', sans-serif;
+    font-weight: 550;
 }
 
 
@@ -378,7 +298,7 @@ header .nav a {
 }
 
 
-/*=============== GOOGLE MAPS ===============*/
+/* GOOGLE MAPS */
 
 .google-map {
     padding-left: 0px;
