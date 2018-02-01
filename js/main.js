@@ -349,3 +349,59 @@ $(function () {
         console.log(a); // TODO attach it to the module
     });
 });
+
+$(function() {
+    var favorites = (function() {
+        var currentFavorites = localStorage.getItem("favorites") ? 
+        JSON.parse(localStorage.getItem("favorites")) :
+        localStorage.setItem("favorites", JSON.stringify(["Varna", "Sofia", "Plovdiv", "Burgas", "Vidin"]));
+        var $ulFavorites = $("#ul-fav-cities");
+        render();
+        var $anchorList = $(".fav-citites-list");
+        var $add = $("#add-city");
+
+        // bind events
+        $(document).on("click", ".cross", deleteCity);
+        $add.on("click", addCity);
+
+        function render(city) {
+            var placeHolder = "";
+            if (typeof currentFavorites === "string") {
+                currentFavorites = JSON.parse(currentFavorites);
+            }
+
+            if (!city) {
+                for (let i = 0; i < currentFavorites.length; i += 1) {
+                    placeHolder = `<a class='fav-cities-list' href='#'>
+                    <li>` + currentFavorites[i] + `</li>
+                    <span class='cross'>
+                        <i class='fa fa-times' aria-hidden='true'></i>
+                    </span>
+                    </a>`;
+
+                    $ulFavorites.append(placeHolder);
+                }
+            } else {
+                placeHolder = `<a class='fav-cities-list' href='#'>
+                <li>` + city + `</li>
+                <span class='cross'>
+                    <i class='fa fa-times' aria-hidden='true'></i>
+                </span>
+                </a>`;
+                $ulFavorites.append(placeHolder);
+            }
+        }
+
+        function addCity() {
+            var $cityName = $(".city-name").text();
+            render($cityName);
+            currentFavorites.push($cityName);
+            localStorage.setItem("favorites", JSON.stringify(currentFavorites));
+        }
+
+        function deleteCity() {
+            var $cityName = $(this).prev().text();
+        }
+
+    })();
+});
