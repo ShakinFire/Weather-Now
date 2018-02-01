@@ -104,8 +104,13 @@ video {
     display: block;
 }
 
+
 /*=============== ERROR SCREEN ===============*/
-.wrapper { display: none; }
+
+.wrapper {
+    display: none;
+}
+
 .error-message-container {
     position: fixed;
     background: rgba(0, 0, 0, 0.8);
@@ -114,7 +119,6 @@ video {
     z-index: 999;
     display: flex;
     align-items: center;
-    
 }
 
 .error-message-screen {
@@ -123,9 +127,15 @@ video {
     border-radius: 7px;
     padding: 10px;
 }
-.error-message-screen .head-section-title { font-size: 20px; }
 
-.error-message-screen .close-error:hover { color: rgb(80, 83, 85); }
+.error-message-screen .head-section-title {
+    font-size: 20px;
+}
+
+.error-message-screen .close-error:hover {
+    color: rgb(80, 83, 85);
+}
+
 .error-message-screen .close-error {
     font-size: 25px;
     padding: 0 10px;
@@ -139,7 +149,7 @@ video {
     font-size: 17px;
     text-align: center;
     padding-bottom: 5px;
-    font-family: 'Nunito', sans-serif;    
+    font-family: 'Nunito', sans-serif;
 }
 
 
@@ -283,15 +293,22 @@ header .nav a {
     color: rgb(80, 83, 85);
 }
 
-.weather-descr { padding-left: 22px; }
-.main-content .main .main-weather-section { margin-top: 30px; }
+.weather-descr {
+    padding-left: 22px;
+}
+
+.main-content .main .main-weather-section {
+    margin-top: 30px;
+}
 
 .main-content .main .main-weather-section-below p {
     color: rgb(80, 83, 85);
     font-size: 18px;
 }
 
+
 /* WEATHER DETAILS */
+
 .weather-details {
     margin-top: 15px;
     padding: 13px;
@@ -311,10 +328,14 @@ header .nav a {
     padding-left: 10px;
     color: rgb(80, 83, 85);
 }
-.weather-details span{ font-family: 'Cabin', sans-serif; }
+
+.weather-details span {
+    font-family: 'Cabin', sans-serif;
+}
 
 
 /* FAVORITE CITIES */
+
 .main-content .favorite-cities {
     padding: 10px 13px;
     background: rgba(229, 232, 237, 0.9);
@@ -356,7 +377,9 @@ header .nav a {
     display: none;
 }
 
+
 /*=============== GOOGLE MAPS ===============*/
+
 .google-map {
     padding-left: 0px;
 }
@@ -370,4 +393,62 @@ header .nav a {
     padding: 10px;
     background: rgba(229, 232, 237, 0.9);
     border-radius: 5px;
+}
+
+.cont-gall {
+    margin-left: 10%;
+    margin-top: 2%;
+    width: 1000px;
+    background-color: rgba(229, 232, 237, 0.9);
+}
+
+.row-gallery img {
+    height: 170px;
+    width: 190px;
+    padding: 1% 0 1% 3%
+}
+
+.head-gallery {
+    text-align: center;
+    font-family: 'Cabin', sans-serif;
+    color: rgb(80, 83, 85);
+}
+
+.navBar {
+    background-color: #5A6571;
+    color: white;
+    height: 10%;
+    align-content: center;
+}
+
+.hamburger {
+    font-size: 30px;
+}
+
+.hamb-menu {
+    padding: 1%;
+}
+
+.hamb-menu li a {
+    color: white;
+    text-decoration: none;
+}
+
+.miniSearch {
+    padding: 2%;
+    width: 400px;
+}
+
+.small-log img {
+    width: 30px;
+    height: 30px;
+}
+
+.small-log h1 {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    cursor: default;
+    text-align: center;
 }

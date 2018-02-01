@@ -1,13 +1,24 @@
 var database = (function () {
     var citiesList = [];
 
-    var _addInCitiesList = function (data) {
-        $(data["values"]).each(function (index, elem) {
-            citiesList.push(elem);
-        });
+    var getRequest = function (url) {
+        var promise = new Promise(function (resolve, reject) {
+            $.ajax({
+                url: url,
+                datatype: "application/json",
+                success: resolve,
+                error: reject
+            });
+        })
+        return promise;
     }
+
     var _getAllCities = (function () {
-        $.getJSON("cities.json", _addInCitiesList);
+        getRequest("cities.json").then(function (data) {
+            $(data["values"]).each(function (index, elem) {
+                citiesList.push(elem);
+            });
+        })
     })();
 
     var _flattenObject = function (ob) {
@@ -30,6 +41,8 @@ var database = (function () {
         return toReturn;
     };
 
+
+
     var getWeatherInfo = function (place, unit, successCallback, failCallback) {
         var un = unit || "metric";
         var url = "";
@@ -45,26 +58,14 @@ var database = (function () {
             console.log(url);
         }
 
-        function makeRequest() {
-            var promise = new Promise(function (resolve, reject) {
-                $.ajax({
-                    url: url,
-                    datatype: "application/json",
-                    success: resolve,
-                    error: reject
-                });
-            })
-            return promise;
-        }
-        makeRequest().then(function (data) {
-            console.log(data)
+        getRequest(url).then(function (data) {
             data = _flattenObject(data);
             successCallback(data);
             console.log(data)
 
         });
 
-        makeRequest().catch(function () {
+        getRequest(url).catch(function () {
             failCallback();
 
         });
@@ -88,76 +89,56 @@ var database = (function () {
         getWeatherInfo,
         getLocation,
     }
-
 })();
 
 var DOM = (function () {
+    var currentCityName = $(".city-name").text();;
 
-    var _changeIcon = function (name) {
+    var _changeIcon = function (name, time) {
         var defaultClass = "wi weather-icon";
         var _changeClass = function (newClass) {
             $("#icon").removeClass();
             $("#icon").addClass(defaultClass);
             $("#icon").addClass(newClass);
-
-
         }
-        switch (name) {
-            case "Thunderstorm":
-                newClass = "wi-day-snow-thunderstorm"
-                break;
-            case "Clouds":
-                newClass = "wi-cloud"
-                break;
-            case "Drizzle":
-                newClass = "wi-day-cloudy"
-                break;
-            case "Rain":
-                newClass = "wi-rain"
-                break;
-            case "Snow":
-                newClass = "wi-snowflake-cold"
-                break;
-            case "Clear":
-                newClass = "wi-day-sunny"
-                break;
-            case "Extreme":
-                newClass = "wi-thunderstorm"
-                break;
-            case "Mist":
-                newClass = "wi-fog"
-                break;
-            case "Fog":
-                newClass = "wi-fog"
-                break;
-
-            default:
-                newClass = "wi-cloud"
-                break;
+        if (name === "Thunderstorm") {
+            newClass = "wi-day-snow-thunderstorm"
+        } else if (name === 'Clouds') {
+            newClass = "wi-cloud"
+        } else if (name === "Drizzle") {
+            newClass = "wi-night-showers"
+        } else if (name === "Rain") {
+            newClass = "wi-rain"
+        } else if (name === "Snow") {
+            newClass = "wi-snowflake-cold"
+        } else if (name === "Clear" && time === "d") {
+            newClass = "wi-day-sunny"
+        } else if (name === "Clear" && time === "n") {
+            newClass = "wi-night-clear"
+        } else if (name === "Extreme") {
+            newClass = "wi-thunderstorm"
+        } else if (name === "Mist" || name === "Fog") {
+            newClass = "wi-fog"
         }
 
         _changeClass(newClass);
 
     }
 
+    function _convertFromUnixTimeStamp(t) {
+        var dt = new Date(t * 1000);
+        var hr = dt.getHours();
+        var m = "0" + dt.getMinutes();
+        var s = "0" + dt.getSeconds();
+        return hr + ':' + m.substr(-2) + ':' + s.substr(-2);
+    }
+
     var displayData = function (obj) {
-        // if ($(".content").hasClass('hidden')) {
-        //     $(".content").removeClass('hidden');
-        //     $(".error").remove();
-        // }
-        function _convertFromUnixTimeStamp(t) {
-            var dt = new Date(t * 1000);
-            var hr = dt.getHours();
-            var m = "0" + dt.getMinutes();
-            var s = "0" + dt.getSeconds();
-            return hr + ':' + m.substr(-2) + ':' + s.substr(-2);
-        }
         $('.city-name').text(obj.name);
         $('.country-name').text(obj.country);
         $('.main-description').text(obj.main);
         $('.temp').text(Math.round(obj.temp));
         $('.description').text(obj.description);
-        _changeIcon(obj.main) //changing the icon accordingly
         $('.temp_max').text(obj.temp_max);
         $('.temp_min').text(obj.temp_min);
         $('.sunrise').text(_convertFromUnixTimeStamp(obj.sunrise));
@@ -170,19 +151,16 @@ var DOM = (function () {
         $('.lat').text(obj.lat);
         $('.lon').text(obj.lon);
 
-        var lat = obj.lat;
-        var lon = obj.lon;
-        // function myMap() {
+        let iconName = obj.icon
+        let time = iconName[iconName.length - 1];
+        if (time === 'd') {
+            $('.parallax').css('background-image', 'url("img/daysky.jpg")');
+        } else {
+            $('.parallax').css('background-image', 'url("img/nightsky.jpg")');
+        }
 
-        //     var mapProp = {
-        //         center: new google.maps.LatLng(obj.lat, obj.lon),
-        //         zoom: 13,
-        //     };
-        //     var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-        // }
-
+        _changeIcon(obj.main, time) //changing the icon accordingly
         myMapChange()
-
     };
 
     var displayError = function () {
@@ -192,7 +170,8 @@ var DOM = (function () {
 
     return {
         displayData,
-        displayError
+        displayError,
+        currentCityName,
     }
 })();
 
@@ -204,8 +183,9 @@ var app = (function () {
 
     var boot = function (unit) {
         update("London", unit)
-        database.getLocation(unit, DOM.displayData, function(){
-        });
+        database.getLocation(unit, DOM.displayData, function () {});
+        currentCity = DOM.currentCityName;
+        console.log(DOM.cityName)
     }
 
     var update = function (cityName, unit) {
@@ -214,9 +194,6 @@ var app = (function () {
         };
         database.getWeatherInfo(cityObj, unit, DOM.displayData, DOM.displayError);
         currentCity = cityName;
-        setTimeout(() => {
-            myMapChange();
-        }, 400);
     };
 
     var bindEvents = function () {
@@ -239,28 +216,20 @@ var app = (function () {
             select: function (event, ui) {
                 update(ui.item.value, unit);
             }
-
         });
 
         $('#toggle').change(function () {
             if ($(this).prop('checked')) {
                 setUnit("metric")
             } else {
-                setUnit("fahrenheit")
+                setUnit("imperial")
             }
-
-            update(currentCity, unit);
+            update(currentCity, unit, false);
         });
-
-
     }
 
     var setUnit = function (newUnit) {
         unit = newUnit;
-    }
-
-    var getUnit = function () {
-        return unit;
     }
 
     var init = function () {
@@ -272,7 +241,6 @@ var app = (function () {
 
     return {
         init,
-        getUnit,
         setUnit,
     }
 })();
@@ -283,25 +251,27 @@ $(document).ready(function () {
 
 // Implementing add and delete favorite city functionality
 
-var errorScreen = function(errorText) {
+var errorScreen = function (errorText) {
     $(".error-message-text").text(errorText); // Pop up error screen with the provided error text
     $(".wrapper").css("display", "block");
 
-    $(".close-error").on("click", function() { // 'hide' the error message when click on 'X' button
+    $(".close-error").on("click", function () { // 'hide' the error message when click on 'X' button
         $(".wrapper").css("display", "none");
     });
 
-    $(".error-message-container").on("click", function(e) { // Fire an event when you click outside the box to 'hide' the error message
+    $(".error-message-container").on("click", function (e) { // Fire an event when you click outside the box to 'hide' the error message
         $(".wrapper").css("display", "none");
     });
 
-    $(".error-message-screen").on("click", function(e) { // Stop the event from firing on the error message screen
+    $(".error-message-screen").on("click", function (e) { // Stop the event from firing on the error message screen
         e.stopPropagation();
     });
 }
 
-$(function(){
-    var checkExistingName = function(cityToCheck) { // check the whole favorite list in local storage for same name
+
+
+$(function () {
+    var checkExistingName = function (cityToCheck) { // check the whole favorite list in local storage for same name
         var initialFavorites = JSON.parse(localStorage.getItem("favorites"));
         var isChecked = false;
         initialFavorites.forEach((val) => {
@@ -312,7 +282,7 @@ $(function(){
         return isChecked;
     }
 
-    var generateFavoriteCities = function() { // Every refresh generate the local storage list of favorite cities
+    var generateFavoriteCities = function () { // Every refresh generate the local storage list of favorite cities
         var initialFavorites = JSON.parse(localStorage.getItem("favorites"));
         initialFavorites.forEach((val) => {
             var placeHolder = `<a class='fav-cities-list' href='#'>
@@ -322,7 +292,7 @@ $(function(){
             </span>
             </a>`;
             $("#ul-fav-cities").append(placeHolder);
-        });      
+        });
     }
 
     if (localStorage.length === 0) { // checks if there is already modified local storage, if not, set the default cities
@@ -332,7 +302,7 @@ $(function(){
     }
     generateFavoriteCities();
 
-    var deleteItem = function(deletedCity) { // Deleting city from local storage
+    var deleteItem = function (deletedCity) { // Deleting city from local storage
         var initialFavorites = JSON.parse(localStorage.getItem("favorites"));
         for (let i = 0; i < initialFavorites.length; i += 1) {
             if (initialFavorites[i] === deletedCity) {
@@ -344,14 +314,14 @@ $(function(){
         localStorage.setItem("favorites", JSON.stringify(initialFavorites));
     }
 
-    var addCity = function(addedCity) { // Add city in local storage
+    var addCity = function (addedCity) { // Add city in local storage
         var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
         currentFavorites.push(addedCity);
         localStorage.setItem("favorites", JSON.stringify(currentFavorites));
         currentFavorites = JSON.parse(localStorage.getItem("favorites"));
     }
 
-    $("#add-city").on("click", function() { // append the whole fragment for favorite city
+    $("#add-city").on("click", function () { // append the whole fragment for favorite city
         var $cityName = $(".city-name").text();
         if (checkExistingName($cityName)) {
             errorScreen("This city is already in your favorite list!");
@@ -367,19 +337,15 @@ $(function(){
         }
     });
 
-    $(document).on("click", ".cross", function(e) { // detach the whole fragment for favorite city
+    $(document).on("click", ".cross", function (e) { // detach the whole fragment for favorite city
         var name = $(this).prev().text();
         $(this).parent().css("display", "none");
         deleteItem(name);
         e.stopPropagation();
     });
 
-    $(document).on("click", ".fav-cities-list", function() { // When clicked on city in the favorite list, refresh the weather-info for this city
+    $(document).on("click", ".fav-cities-list", function () { // When clicked on city in the favorite list, refresh the weather-info for this city
         var a = $(this).children("li").text();
         console.log(a); // TODO attach it to the module
     });
 });
-
-
-faopf\pojwfpawh\fapw\ihfafwjafwkqwf
-q

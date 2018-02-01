@@ -41,13 +41,23 @@
     </div>
     <!-- HEADER -->
     <header>
+
         <div class="container">
             <div class="row header-content">
-                <div class="col-xs-3 logo">
+                <div class="col-xs-3 logo  hidden-xs">
                     <img src="img/image-white.png">
                     <h1>WeatherEarth</h1>
                 </div>
-                <div class="col-xs-4 col-xs-offset-1 nav">
+                <div class="col-xs-3 small-log  visible-xs">
+                    <img src="img/image-white.png">
+                    <h1>WeatherEarth</h1>
+                </div>
+                <div class="col-sm-3 col-sm-offset-2  visible-sm"> <i class="glyphicon glyphicon-align-justify hamburger  visible-xs visible-sm"></i>
+
+                </div>
+
+                <div class="col-sm-4 col-xs-offset-1 nav menuBar  visible-md visible-lg">
+
                     <ul class="list-inline">
                         <li>
                             <a href="#">GALLERY</a>
@@ -60,7 +70,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-xs-3 search-bar">
+                <div class="col-sm-3 search-bar visible-sm visible-md visible-lg">
                     <form action="">
                         <div class="input-group">
                             <input class="form-control search" type="text" placeholder="Search for city...">
@@ -72,10 +82,43 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-xs-1">
+                <div class="col-xs-1 visible-sm visible-md visible-lg">
                     <input type="checkbox" data-size="small" data-on="&deg;C" data-off="&deg;F" data-onstyle="primary" data-offstyle="warning" checked data-toggle="toggle" id="toggle" data-style="ios">
                 </div>
             </div>
+
+            <div class="row visible-xs col-xs-offset-1">
+                <div class="  visible-xs"> <i class="glyphicon glyphicon-align-justify hamburger  visible-xs visible-sm"></i>
+                </div>
+            </div>
+            <div class="row hidden  col-sm-offset-6  hamb-menu  hidden-md hidden-lg" id="hamb-menu">
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="#">GALLERY</a>
+                    </li>
+                    <li>
+                        <a href="#">MAPS</a>
+                    </li>
+                    <li>
+                        <a href="#">MOON</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="visible-xs search-bar miniSearch">
+                    <form action="">
+                        <div class="input-group">
+                            <input class="form-control search" type="text" placeholder="Search for city...">
+                            <span class="input-group-btn">
+                                        <button class="btn btn-primary button" type="submit" onclick="myMapChange()">
+                                            <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
         </div>
     </header>
 
@@ -84,7 +127,7 @@
         <!-- CONTENT SECTION -->
         <div class="container main-content">
             <div class="row content">
-                <div class="col-xs-4 main">
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4  main">
                     <div class="weather-info">
                         <p class="head-section-title">CURRENT WEATHER</p>
                         <div class="row">
@@ -164,7 +207,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-5 google-map">
+                <div class="col-xs-5 google-map hidden-xs">
                     <div class="google-map-box">
                         <div class="head-section-title">
                             Google Maps
@@ -173,7 +216,7 @@
                     </div>
                 </div>
                 <!-- FAVORITE CITIES -->
-                <div class="col-xs-3 favorite-cities">
+                <div class="col-xs-3 favorite-cities hidden-xs">
                     <p class="head-section-title">FAVORITES</p>
                     <ul id="ul-fav-cities" class='list-unstyled'>
                     </ul>
@@ -244,7 +287,13 @@
     <script src="js/jquery-ui.min.js"></script>
 
     <script src="js/main.js"></script>
+    <script>
+        $(".hamburger").on("click", function() {
+            $("#hamb-menu").toggleClass("hidden");
+        });
+    </script>
 </body>
+
 <script>
     function myMap() {
 
