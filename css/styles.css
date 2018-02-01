@@ -273,7 +273,7 @@ header .nav a {
 }
 
 .main-content .main .weather-icon {
-    font-size: 70px;
+    font-size: 68px;
     color: rgb(80, 83, 85);
     margin-top: 20px;
 }
@@ -283,29 +283,27 @@ header .nav a {
     color: #FD9308;
 }
 
-.main-content .main .plus-icon:hover {
-    color: rgb(255, 115, 0);
+.main-content .main .plus-icon-section {
+    padding-left: 0;
+    text-align: center;
 }
 
+.main-content .main .plus-icon:hover { color: rgb(255, 115, 0); }
 .main-content .main .cel-far {
     font-size: 70px;
     font-weight: bold;
     color: rgb(80, 83, 85);
 }
 
-.weather-descr {
-    padding-left: 22px;
-}
-
-.main-content .main .main-weather-section {
-    margin-top: 30px;
-}
+.weather-descr { text-align: center; }
+.main-content .main .main-weather-section { margin-top: 20px; }
+.main-content .main .weather-icon-section { text-align: center; }
 
 .main-content .main .main-weather-section-below p {
+    margin-top: 10px;
     color: rgb(80, 83, 85);
     font-size: 18px;
 }
-
 
 /* WEATHER DETAILS */
 
@@ -325,12 +323,14 @@ header .nav a {
 }
 
 .weather-details .weather-values {
-    padding-left: 10px;
+    padding-left: 7px;
     color: rgb(80, 83, 85);
+    
 }
 
 .weather-details span {
     font-family: 'Cabin', sans-serif;
+    font-weight: 550;
 }
 
 
