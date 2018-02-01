@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <!-- GOOGLE FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Cabin:600" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Cabin:600" rel="stylesheet"> -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:300" rel="stylesheet">
     <!-- BOOTSTRAP FILE -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -21,22 +21,24 @@
     <!-- WEATHER ICONS FILE -->
     <link rel="stylesheet" href="css/weather-icons.min.css">
     <link rel="stylesheet" href="js/jquery-ui.min.css">
-
 </head>
 
 <body>
-<div class="wrapper">
-    <div class="error-message-container">
-        <div class="error-message-screen col-xs-offset-3 col-xs-6 col-lg-offset-4 col-lg-4">
-            <div class="head-section-title">
-                <p>Error Message<a class="close-error" href="#"><i class='fa fa-times' aria-hidden='true'></i></a></p>
-            </div>
-            <div class="error-message">
-                <p class="error-message-text"></p>
+
+    <!-- ERROR MESSAGE SCREEN -->
+    <div class="wrapper">
+        <div class="error-message-container">
+            <div class="error-message-screen col-xs-offset-3 col-xs-6 col-lg-offset-4 col-lg-4">
+                <div class="head-section-title">
+                    <p>Error Message<a class="close-error" href="#"><i class='fa fa-times' aria-hidden='true'></i></a></p>
+                </div>
+                <div class="error-message">
+                    <p class="error-message-text"></p>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
     <!-- HEADER -->
     <header>
         <div class="container">
@@ -63,7 +65,7 @@
                         <div class="input-group">
                             <input class="form-control search" type="text" placeholder="Search for city...">
                             <span class="input-group-btn">
-                                <button class="btn btn-primary button" type="submit">
+                                <button class="btn btn-primary button" type="submit" onclick="myMapChange()">
                                     <span class="glyphicon glyphicon-search"></span>
                                 </button>
                             </span>
@@ -72,7 +74,7 @@
                 </div>
                 <div class="col-xs-1">
                     <input type="checkbox" data-size="small" data-on="&deg;C" data-off="&deg;F" data-onstyle="primary" data-offstyle="warning" checked
-                    data-toggle="toggle" data-style="ios">
+                    data-toggle="toggle" id="toggle" data-style="ios">
                 </div>
             </div>
         </div>
@@ -91,23 +93,25 @@
                                 <h1 class="city-name">Sofia</h1>
                                 <h4 class="country-name">Bulgaria</h4>
                             </div>
-                            <div class="col-xs-4">
+                            <div class="col-xs-4 plus-icon-section">
                                 <a id="add-city" href="#"><i class="fa fa-plus-circle plus-icon" aria-hidden="true"></i></a>
                             </div>
                         </div>
                         <div class="row main-weather-section">
                             <div class="col-xs-5">
                                 <p class="text-center cel-far">
-                                    <span class="temp"></span>&deg;</p>
+                                    <span class="temp"></span>&deg;
+                                </p>
                             </div>
-                            <div class="col-xs-5 col-xs-offset-2">
-                                <i class="wi wi-day-cloudy weather-icon"></i>
+                            <div class="col-xs-5 col-xs-offset-2 weather-icon-section">
+                                <i class="wi weather-icon" id="icon"></i>
                             </div>
                         </div>
                         <div class="row main-weather-section-below">
                             <div class="col-xs-5">
                                 <p class="text-center">Feels like
-                                    <span class="temp"></span>&deg;</p>
+                                    <span class="temp"></span>&deg;
+                                </p>
                             </div>
                             <div class="col-xs-5 col-xs-offset-2">
                                 <p class="weather-descr">
@@ -122,41 +126,58 @@
                         <div class='row'>
                             <div class="col-xs-6">
                                 <ul class="list-unstyled">
-                                    <li>Highest:
-                                        <span class="temp_max"></span>&deg;
+                                    <li>Highest
+                                        <span class="temp_max weather-values"></span>&deg;
                                     </li>
-                                    <li>Lowest:
-                                        <span class="temp_min"></span>&deg;
+                                    <li>Sunrise
+                                        <span class="sunrise weather-values"></span>
                                     </li>
-                                    <li>Sunrise:
-                                        <span class="sunrise"></span>
+                                    <li>Sunset
+                                        <span class="sunset weather-values"></span>
                                     </li>
-                                    <li>Sunset:
-                                        <span class="sunset"></span>
+
+                                    <li>lon
+                                        <span id="lon" class="lon weather-values"></span>
+                                    </li>
+                                    <li>lat
+                                        <span id="lat" class="lat weather-values"></span>
                                     </li>
                                 </ul>
                             </div>
                             <div class="col-xs-6">
                                 <ul class='list-unstyled'>
-                                    <li>Wind Speed:
-                                        <span class="speed weather-values"></span><span>m/s</span>
+                                    <li>Lowest
+                                        <span class="temp_min weather-values"></span>&deg;
                                     </li>
-                                    <li>Cloudliness:
+                                    <li>Cloudliness
                                         <span class="clouds weather-values"></span><span>%</span>
                                     </li>
-                                    <li>Humidity:
+                                    <li>Humidity
                                         <span class="humidity weather-values"></span><span>%</span>
                                     </li>
-                                    <li>Pressure:
+                                    <li>Pressure
                                         <span class="pressure weather-values"></span><span>mb</span>
                                     </li>
+                                    <li>Wind Speed
+                                        <span class="speed weather-values"></span><span>m/s</span>
+                                    </li>
+
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
+    <!-- GOOGLE MAPS -->
+                <div class="col-xs-5 google-map">
+                    <div class="google-map-box">
+                        <div class="head-section-title">
+                            MAPS
+                        </div>
+                        <div id="googleMap" class="map-details"></div>
+                    </div>
+                </div>
     <!-- FAVORITE CITIES -->
-                <div class="col-xs-3 col-xs-offset-5 favorite-cities">
+                <div class="col-xs-3 favorite-cities">
                     <p class="head-section-title">FAVORITES</p>
                     <ul id="ul-fav-cities" class='list-unstyled'>
                     </ul>
@@ -171,5 +192,32 @@
 
     <script src="js/main.js"></script>
 </body>
+
+<script>
+    function myMap() {
+
+        var mapProp = {
+            center: new google.maps.LatLng(42.7, 23.32),
+            zoom: 13,
+        };
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+    }
+</script>
+
+<script>
+    function myMapChange() {
+        var lon = $("#lon").text();
+        var lat = $("#lat").text();
+        $('#results').text(lon);
+        var mapProp = {
+            center: new google.maps.LatLng(lat, lon),
+            zoom: 10,
+        };
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+    }
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkUlIYkH9OJ-loM6ADhmojHM6Ve7yHaSw&callback=myMap"></script>
 
 </html>

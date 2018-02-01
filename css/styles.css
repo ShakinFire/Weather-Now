@@ -1,4 +1,5 @@
-/* GLOBAL */
+/*=============== GLOBAL ===============*/
+
 body {
     height: 2500px;
     background: rgb(232, 229, 245);
@@ -13,21 +14,12 @@ body {
     color: rgb(80, 83, 85);
 }
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,
+code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,
+fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,
+figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video {
+    margin: 0;
+    padding: 0;
     border: 0;
 }
 
@@ -36,7 +28,10 @@ time, mark, audio, video {
 }
 
 /*=============== ERROR SCREEN ===============*/
-.wrapper { display: none; }
+.wrapper {
+    display: none;
+}
+
 .error-message-container {
     position: fixed;
     background: rgba(0, 0, 0, 0.8);
@@ -45,7 +40,6 @@ time, mark, audio, video {
     z-index: 999;
     display: flex;
     align-items: center;
-    
 }
 
 .error-message-screen {
@@ -54,9 +48,15 @@ time, mark, audio, video {
     border-radius: 7px;
     padding: 10px;
 }
-.error-message-screen .head-section-title { font-size: 20px; }
 
-.error-message-screen .close-error:hover { color: rgb(80, 83, 85); }
+.error-message-screen .head-section-title {
+    font-size: 20px;
+}
+
+.error-message-screen .close-error:hover {
+    color: rgb(80, 83, 85);
+}
+
 .error-message-screen .close-error {
     font-size: 25px;
     padding: 0 10px;
@@ -70,8 +70,9 @@ time, mark, audio, video {
     font-size: 17px;
     text-align: center;
     padding-bottom: 5px;
-    font-family: 'Nunito', sans-serif;    
+    font-family: 'Nunito', sans-serif;
 }
+
 
 /*=============== HEADER ===============*/
 header {
@@ -107,7 +108,7 @@ header img {
     height: 50px;
 }
 
-header .nav{
+header .nav {
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -117,12 +118,14 @@ header .nav ul {
     margin-right: 20px;
 }
 
-header .nav li { 
+header .nav li {
     padding: 0 20px;
     border-right: 1px solid #FD9308;
 }
 
-header .nav li:last-child { border-right: 0; }
+header .nav li:last-child {
+    border-right: 0;
+}
 
 header .nav a {
     color: #E5E8ED;
@@ -132,28 +135,42 @@ header .nav a {
     font-family: 'Cabin', sans-serif;
 }
 
+
 /*=============== PARALLAX BACKGROUND ===============*/
+
 .parallax {
     height: 700px;
     position: relative;
     background-image: url('../img/sunny.jpeg');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover; /* ebasi qkoto neshto! */
+    background-size: cover;
+    /* ebasi qkoto neshto! */
     background-attachment: fixed;
 }
 
+
 /*=============== CONTENT ===============*/
 
+
 /* ROUND TOGGLE SWITCH BUTTON */
-.toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
-.toggle.ios .toggle-handle { border-radius: 20px; }
+
+.toggle.ios,
+.toggle-on.ios,
+.toggle-off.ios {
+    border-radius: 20px;
+}
+
+.toggle.ios .toggle-handle {
+    border-radius: 20px;
+}
+
 
 /* MAIN CONTENT */
 
 .main-content .content {
     position: relative;
-    margin-top: 100px;
+    margin-top: 70px;
     height: 600px;
 }
 
@@ -162,6 +179,7 @@ header .nav a {
     background: rgba(229, 232, 237, 0.9);
     border-radius: 5px;
 }
+
 .main-content .main .city-name {
     font-family: 'Cabin', sans-serif;
     letter-spacing: 1px;
@@ -169,13 +187,13 @@ header .nav a {
     color: rgb(80, 83, 85);
 }
 
-.main-content .main .country-name { 
+.main-content .main .country-name {
     color: rgb(80, 83, 85);
     padding-left: 15px;
 }
 
 .main-content .main .weather-icon {
-    font-size: 70px;
+    font-size: 68px;
     color: rgb(80, 83, 85);
     margin-top: 20px;
 }
@@ -185,26 +203,32 @@ header .nav a {
     color: #FD9308;
 }
 
-.main-content .main .plus-icon:hover {
-    color: rgb(255, 115, 0);
+.main-content .main .plus-icon-section {
+    padding-left: 0;
+    text-align: center;
 }
 
+.main-content .main .plus-icon:hover { color: rgb(255, 115, 0); }
 .main-content .main .cel-far {
     font-size: 70px;
     font-weight: bold;
     color: rgb(80, 83, 85);
 }
 
-.weather-descr { padding-left: 22px; }
-.main-content .main .main-weather-section { margin-top: 30px; }
+.weather-descr { text-align: center; }
+.main-content .main .main-weather-section { margin-top: 20px; }
+.main-content .main .weather-icon-section { text-align: center; }
+
 .main-content .main .main-weather-section-below p {
+    margin-top: 10px;
     color: rgb(80, 83, 85);
     font-size: 18px;
 }
 
-/* WEATHER DETAILS */ 
+/* WEATHER DETAILS */
+
 .weather-details {
-    margin-top: 3%;
+    margin-top: 15px;
     padding: 13px;
     background: rgba(229, 232, 237, 0.9);
     border-radius: 5px;
@@ -219,12 +243,19 @@ header .nav a {
 }
 
 .weather-details .weather-values {
-    padding-left: 10px;
+    padding-left: 7px;
     color: rgb(80, 83, 85);
+    
 }
-.weather-details span{ font-family: 'Cabin', sans-serif; }
+
+.weather-details span {
+    font-family: 'Cabin', sans-serif;
+    font-weight: 550;
+}
+
 
 /* FAVORITE CITIES */
+
 .main-content .favorite-cities {
     padding: 10px 13px;
     background: rgba(229, 232, 237, 0.9);
@@ -255,11 +286,45 @@ header .nav a {
     border-left: 3px solid #FD9308;
 }
 
-.main-content .fav-cities-list:hover .cross i { display: flex; }
+.main-content .fav-cities-list:hover .cross i {
+    display: flex;
+}
 
 .main-content .fav-cities-list .cross i {
     font-size: 18px;
     color: rgb(139, 139, 139);
     padding: 4px;
     display: none;
+}
+
+
+/* GOOGLE MAPS */
+
+.google-map {
+    padding-left: 0px;
+}
+
+.map-details {
+    width: 100%;
+    height: 500px;
+}
+
+.google-map-box {
+    padding: 10px;
+    background: rgba(229, 232, 237, 0.9);
+    border-radius: 5px;
+}
+
+.cont-gall {
+    margin-left: 25%;
+    margin-top: 25%;
+    width: 630px;
+    background-color: gray;
+    align-items: center;
+}
+
+.row-gallery img {
+    height: 100px;
+    width: 150px;
+    padding: 1% 0 1% 3%
 }
