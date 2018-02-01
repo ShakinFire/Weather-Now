@@ -270,82 +270,173 @@ var errorScreen = function (errorText) {
 
 
 
-$(function () {
-    var checkExistingName = function (cityToCheck) { // check the whole favorite list in local storage for same name
-        var initialFavorites = JSON.parse(localStorage.getItem("favorites"));
-        var isChecked = false;
-        initialFavorites.forEach((val) => {
-            if (cityToCheck === val) {
-                isChecked = true;
+// $(function () {
+//     var checkExistingName = function (cityToCheck) { // check the whole favorite list in local storage for same name
+//         var initialFavorites = JSON.parse(localStorage.getItem("favorites"));
+//         var isChecked = false;
+//         initialFavorites.forEach((val) => {
+//             if (cityToCheck === val) {
+//                 isChecked = true;
+//             }
+//         });
+//         return isChecked;
+//     }
+
+//     var generateFavoriteCities = function () { // Every refresh generate the local storage list of favorite cities
+//         var initialFavorites = JSON.parse(localStorage.getItem("favorites"));
+//         initialFavorites.forEach((val) => {
+//             var placeHolder = `<a class='fav-cities-list' href='#'>
+//             <li>` + val + `</li>
+//             <span class='cross'>
+//                 <i class='fa fa-times' aria-hidden='true'></i>
+//             </span>
+//             </a>`;
+//             $("#ul-fav-cities").append(placeHolder);
+//         });
+//     }
+
+//     if (localStorage.length === 0) { // checks if there is already modified local storage, if not, set the default cities
+//         var holdDefault = ['Varna', 'Sofia', 'Vidin', 'Burgas'];
+//         localStorage.setItem("favorites", JSON.stringify(holdDefault));
+//         var initialFavorites = JSON.parse(localStorage.getItem("favorites"));
+//     }
+//     generateFavoriteCities();
+
+//     var deleteItem = function (deletedCity) { // Deleting city from local storage
+//         var initialFavorites = JSON.parse(localStorage.getItem("favorites"));
+//         for (let i = 0; i < initialFavorites.length; i += 1) {
+//             if (initialFavorites[i] === deletedCity) {
+//                 initialFavorites.splice(i, 1);
+//                 break;
+//             }
+//         }
+
+//         localStorage.setItem("favorites", JSON.stringify(initialFavorites));
+//     }
+
+//     var addCity = function (addedCity) { // Add city in local storage
+//         var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
+//         currentFavorites.push(addedCity);
+//         localStorage.setItem("favorites", JSON.stringify(currentFavorites));
+//         currentFavorites = JSON.parse(localStorage.getItem("favorites"));
+//     }
+
+//     $("#add-city").on("click", function () { // append the whole fragment for favorite city
+//         var $cityName = $(".city-name").text();
+//         if (checkExistingName($cityName)) {
+//             errorScreen("This city is already in your favorite list!");
+//         } else {
+//             var placeHolder = `<a class='fav-cities-list' href='#'>
+//             <li>` + $cityName + `</li>
+//             <span class='cross'>
+//                 <i class='fa fa-times' aria-hidden='true'></i>
+//             </span>
+//             </a>`;
+//             $("#ul-fav-cities").append(placeHolder);
+//             addCity($cityName);
+//         }
+//     });
+
+//     $(document).on("click", ".cross", function (e) { // detach the whole fragment for favorite city
+//         var name = $(this).prev().text();
+//         $(this).parent().css("display", "none");
+//         deleteItem(name);
+//         e.stopPropagation();
+//     });
+
+//     $(document).on("click", ".fav-cities-list", function () { // When clicked on city in the favorite list, refresh the weather-info for this city
+//         var a = $(this).children("li").text();
+//         console.log(a); // TODO attach it to the module
+//     });
+// });
+
+$(function() {
+    var favorites = (function() {
+        var currentFavorites = localStorage.getItem("favorites") ? 
+        JSON.parse(localStorage.getItem("favorites")) :
+        localStorage.setItem("favorites", JSON.stringify(["Varna", "Sofia", "Plovdiv", "Burgas", "Vidin"]));
+        var $ulFavorites = $("#ul-fav-cities");
+        render();
+        var $anchorList = $(".fav-citites-list");
+        var $add = $("#add-city");
+
+        // bind events
+        $(document).on("click", ".cross", deleteCity);
+        $add.on("click", addCity);
+        $(document).on("click", ".fav-cities-list", displayCity);
+
+        function displayCity() {
+            var cityToDisplay = $(this).children("li").text();
+            console.log(cityToDisplay); // connect with the database module, to refresh the displayed city
+        }
+
+        function checkForExistingCity(city) {
+            for (let i = 0; i < currentFavorites.length; i += 1) {
+                if (currentFavorites[i] === city) {
+                    return true;
+                }
             }
-        });
-        return isChecked;
-    }
+            return false;
+        }
 
-    var generateFavoriteCities = function () { // Every refresh generate the local storage list of favorite cities
-        var initialFavorites = JSON.parse(localStorage.getItem("favorites"));
-        initialFavorites.forEach((val) => {
-            var placeHolder = `<a class='fav-cities-list' href='#'>
-            <li>` + val + `</li>
-            <span class='cross'>
-                <i class='fa fa-times' aria-hidden='true'></i>
-            </span>
-            </a>`;
-            $("#ul-fav-cities").append(placeHolder);
-        });
-    }
+        function render(city) {
+            debugger;
+            var placeHolder = "";
+            if (typeof currentFavorites === "string") {
+                currentFavorites = JSON.parse(currentFavorites);
+            }
 
-    if (localStorage.length === 0) { // checks if there is already modified local storage, if not, set the default cities
-        var holdDefault = ['Varna', 'Sofia', 'Vidin', 'Burgas'];
-        localStorage.setItem("favorites", JSON.stringify(holdDefault));
-        var initialFavorites = JSON.parse(localStorage.getItem("favorites"));
-    }
-    generateFavoriteCities();
+            if (!city) {
+                for (let i = 0; i < currentFavorites.length; i += 1) {
+                    placeHolder = `<a class='fav-cities-list' href='#'>
+                    <li>` + currentFavorites[i] + `</li>
+                    <span class='cross'>
+                        <i class='fa fa-times' aria-hidden='true'></i>
+                    </span>
+                    </a>`;
 
-    var deleteItem = function (deletedCity) { // Deleting city from local storage
-        var initialFavorites = JSON.parse(localStorage.getItem("favorites"));
-        for (let i = 0; i < initialFavorites.length; i += 1) {
-            if (initialFavorites[i] === deletedCity) {
-                initialFavorites.splice(i, 1);
-                break;
+                    $ulFavorites.append(placeHolder);
+                }
+            } else {
+                placeHolder = `<a class='fav-cities-list' href='#'>
+                <li>` + city + `</li>
+                <span class='cross'>
+                    <i class='fa fa-times' aria-hidden='true'></i>
+                </span>
+                </a>`;
+                $ulFavorites.append(placeHolder);
             }
         }
 
-        localStorage.setItem("favorites", JSON.stringify(initialFavorites));
-    }
-
-    var addCity = function (addedCity) { // Add city in local storage
-        var currentFavorites = JSON.parse(localStorage.getItem("favorites"));
-        currentFavorites.push(addedCity);
-        localStorage.setItem("favorites", JSON.stringify(currentFavorites));
-        currentFavorites = JSON.parse(localStorage.getItem("favorites"));
-    }
-
-    $("#add-city").on("click", function () { // append the whole fragment for favorite city
-        var $cityName = $(".city-name").text();
-        if (checkExistingName($cityName)) {
-            errorScreen("This city is already in your favorite list!");
-        } else {
-            var placeHolder = `<a class='fav-cities-list' href='#'>
-            <li>` + $cityName + `</li>
-            <span class='cross'>
-                <i class='fa fa-times' aria-hidden='true'></i>
-            </span>
-            </a>`;
-            $("#ul-fav-cities").append(placeHolder);
-            addCity($cityName);
+        function addCity() {
+            var $cityName = $(".city-name").text();
+            if (!checkForExistingCity($cityName)) {
+                render($cityName);
+                currentFavorites.push($cityName);
+                localStorage.setItem("favorites", JSON.stringify(currentFavorites));
+            } else {
+                // error
+            }
         }
-    });
 
-    $(document).on("click", ".cross", function (e) { // detach the whole fragment for favorite city
-        var name = $(this).prev().text();
-        $(this).parent().css("display", "none");
-        deleteItem(name);
-        e.stopPropagation();
-    });
+        function deleteCity(event) {
+            var $cityName = $(this).prev().text();
+            $(this).parent().css("display", "none");
+            
+            for (let i = 0; i < currentFavorites.length; i += 1) {
+                if (currentFavorites[i] === $cityName) {
+                    currentFavorites.splice(i, 1);
+                    break;
+                }
+            }
 
-    $(document).on("click", ".fav-cities-list", function () { // When clicked on city in the favorite list, refresh the weather-info for this city
-        var a = $(this).children("li").text();
-        console.log(a); // TODO attach it to the module
-    });
+            localStorage.setItem("favorites", JSON.stringify(currentFavorites));
+            event.stopPropagation();
+        }
+
+        return {
+            addCity,
+            deleteCity
+        }
+    })();
 });
