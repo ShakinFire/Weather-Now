@@ -251,7 +251,7 @@ header .nav a {
 .main-content .content {
     position: relative;
     margin-top: 70px;
-    height: 600px;
+    height: 350px;
 }
 
 .main-content .main .weather-info {
@@ -306,7 +306,6 @@ header .nav a {
 }
 
 /* WEATHER DETAILS */
-
 .weather-details {
     margin-top: 15px;
     padding: 13px;
@@ -335,6 +334,9 @@ header .nav a {
 
 
 /* FAVORITE CITIES */
+.main-content .fav-pad {
+    padding-left: 0;
+}
 
 .main-content .favorite-cities {
     padding: 10px 13px;
@@ -379,7 +381,6 @@ header .nav a {
 
 
 /*=============== GOOGLE MAPS ===============*/
-
 .google-map {
     padding-left: 0px;
 }
@@ -451,4 +452,28 @@ header .nav a {
     font-family: 'Roboto', sans-serif;
     cursor: default;
     text-align: center;
+}
+
+
+/*=============== MEDIA QUERIES ===============*/
+
+@media (max-width: 993px) {
+    .map-details {
+        height: 300px;
+    }
+
+    .main-content .favorite-cities {
+        margin-top: 15px;
+        max-height: 256px;    
+    }
+}
+
+@media (max-width: 1199px) {
+    .weather-details .wd-col-2 {
+        padding-left: 0;
+    }
+
+    .main-content .content {
+        margin-top: 40px;
+    }
 }
