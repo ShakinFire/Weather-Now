@@ -1,7 +1,6 @@
 /* GLOBAL */
 
 body {
-    height: 2500px;
     background: rgb(232, 229, 245);
 }
 
@@ -14,87 +13,12 @@ body {
     color: rgb(80, 83, 85);
 }
 
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
+pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset,
+form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas,
+details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section,
+summary, time, mark, audio, video {
     margin: 0;
     padding: 0;
     border: 0;
@@ -152,14 +76,52 @@ video {
     font-family: 'Nunito', sans-serif;
 }
 
-
 /*=============== HEADER ===============*/
 
 header {
-    background: #5A6571;
+    background: rgb(54, 60, 66);
     /* border-bottom: 2px solid #FD9308; */
 }
 
+/* DROP DOWN MENU */
+header .hamburger {
+    font-size: 35px;
+    color: rgb(235, 235, 235);
+}
+
+header .drop-down-hamburger { text-decoration: none; }
+header .hamburger:hover { color: #FD9308; }
+
+.drop-down .drop-down-menu {
+    position: static;
+    top: 70px;
+    right: 0;
+    background: rgb(54, 60, 66);
+    z-index: 99999;
+    width: 100%;
+    text-align: center;
+}
+.drop-down .drop-down-wrapper { padding: 0 10px; }
+.drop-down .drop-down-menu ul { list-style-type: none; }
+
+.drop-down .drop-down-menu li {
+    padding: 10px 3px;
+    border-bottom: 1px solid rgb(207, 207, 207)
+}
+
+.drop-down .drop-down-menu li:last-child { border-bottom: none; }
+
+.drop-down .drop-down-menu a {
+    text-decoration: none;
+    color: #E5E8ED;
+    font-family: 'Cabin', sans-serif;
+    font-size: 17px;
+    padding: 10px;
+}
+
+.drop-down .drop-down-menu a:hover { color: #FD9308; }
+
+/* MAIN NAVIGATION */
 header .logo {
     display: flex;
     align-items: center;
@@ -215,23 +177,32 @@ header .nav a {
     font-family: 'Cabin', sans-serif;
 }
 
+header .nav a:hover { 
+    color: #FD9308;
+}
+
+header .search-bar {
+    padding: 0;
+}
+
+header .small-toggle-cel {
+    padding-left: 0;
+}
 
 /*=============== PARALLAX BACKGROUND ===============*/
 
 .parallax {
-    height: 700px;
     position: relative;
-    background-image: url('../img/sunny.jpeg');
+    background-image: url('../img/daysky.jpg');
     background-repeat: no-repeat;
+    padding-bottom:40px;
     background-position: center;
     background-size: cover;
     /* ebasi qkoto neshto! */
     background-attachment: fixed;
 }
 
-
 /*=============== CONTENT ===============*/
-
 
 /* ROUND TOGGLE SWITCH BUTTON */
 
@@ -244,7 +215,6 @@ header .nav a {
 .toggle.ios .toggle-handle {
     border-radius: 20px;
 }
-
 
 /* MAIN CONTENT */
 
@@ -288,16 +258,27 @@ header .nav a {
     text-align: center;
 }
 
-.main-content .main .plus-icon:hover { color: rgb(255, 115, 0); }
+.main-content .main .plus-icon:hover {
+    color: rgb(255, 115, 0);
+}
+
 .main-content .main .cel-far {
     font-size: 70px;
     font-weight: bold;
     color: rgb(80, 83, 85);
 }
 
-.weather-descr { text-align: center; }
-.main-content .main .main-weather-section { margin-top: 20px; }
-.main-content .main .weather-icon-section { text-align: center; }
+.weather-descr {
+    text-align: center;
+}
+
+.main-content .main .main-weather-section {
+    margin-top: 20px;
+}
+
+.main-content .main .weather-icon-section {
+    text-align: center;
+}
 
 .main-content .main .main-weather-section-below p {
     margin-top: 10px;
@@ -324,14 +305,12 @@ header .nav a {
 .weather-details .weather-values {
     padding-left: 7px;
     color: rgb(80, 83, 85);
-    
 }
 
 .weather-details span {
     font-family: 'Cabin', sans-serif;
     font-weight: 550;
 }
-
 
 /* FAVORITE CITIES */
 .main-content .fav-pad {
@@ -396,24 +375,87 @@ header .nav a {
     border-radius: 5px;
 }
 
-.cont-gall {
-    margin-left: 10%;
-    margin-top: 2%;
-    width: 1000px;
-    background-color: rgba(229, 232, 237, 0.9);
+/* ============= GALLERY ============== */
+
+.gallery {
+    margin:50px auto;
 }
 
-.row-gallery img {
-    height: 170px;
-    width: 190px;
-    padding: 1% 0 1% 3%
-}
-
-.head-gallery {
+.gallery h2 {
     text-align: center;
+    margin-bottom: 30px;
+}
+
+.gallery p {
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.gallery a {
+    margin-bottom: 20px;
+}
+
+.gallery img {
+    width: 100%;
+    height: 160px;
+}
+
+/* TEAM */
+
+.team .team-title {
+    margin-top: 30px;
+    background: rgba(229, 232, 237, 0.99);
+    border-radius: 5px;
     font-family: 'Cabin', sans-serif;
+    text-align: center;
+    padding:15px 0;
+    margin-bottom: 15px;
     color: rgb(80, 83, 85);
 }
+
+
+.team .member {
+    text-align:center;
+    padding:15px;
+    margin-top: 15px;
+    background: rgba(229, 232, 237, 0.9);
+    border-radius: 5px;
+}
+
+.team h3 {
+    margin:10px 0 5px 0;
+}
+
+.team p {
+    font-size:1.15em;
+}
+.team .fa {
+    margin-top:6px;
+    font-size:2em;
+    margin-right:0.2em;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding:10px;
+    height:40px;
+}
+footer ul {
+    list-style-type:none;
+}
+footer ul li {
+    margin-right:12px;
+}
+
+footer .fa {
+    margin-top:-2px;
+    font-size: 1.8em;
+    margin-right: 0.2em;
+    color:#5A6571;
+}
+
 
 .navBar {
     background-color: #5A6571;
@@ -456,6 +498,27 @@ header .nav a {
 
 
 /*=============== MEDIA QUERIES ===============*/
+
+@media (max-width: 685px) {
+    .main {
+        width: 100%;
+    }
+
+    header h1 {
+        display: none;
+    }
+
+    header img {
+        height: 40px;
+        width: 40px;
+    }
+    
+    .google-map, .fav-pad {
+        width: 100%;
+        padding-left: 15px !important;
+        margin-top: 15px;
+    }
+}
 
 @media (max-width: 993px) {
     .map-details {
