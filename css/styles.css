@@ -103,6 +103,7 @@ video {
     display: block;
 }
 
+
 /*=============== ERROR SCREEN ===============*/
 
 .wrapper {
@@ -153,10 +154,49 @@ video {
 /*=============== HEADER ===============*/
 
 header {
-    background: #5A6571;
+    background: rgb(54, 60, 66);
     /* border-bottom: 2px solid #FD9308; */
 }
 
+/* DROP DOWN MENU */
+header .hamburger {
+    font-size: 35px;
+    color: rgb(235, 235, 235);
+}
+
+header .drop-down-hamburger { text-decoration: none; }
+header .hamburger:hover { color: #FD9308; }
+
+.drop-down .drop-down-menu {
+    position: static;
+    top: 70px;
+    right: 0;
+    background: rgb(54, 60, 66);
+    z-index: 99999;
+    width: 100%;
+    text-align: center;
+}
+.drop-down .drop-down-wrapper { padding: 0 10px; }
+.drop-down .drop-down-menu ul { list-style-type: none; }
+
+.drop-down .drop-down-menu li {
+    padding: 10px 3px;
+    border-bottom: 1px solid rgb(207, 207, 207)
+}
+
+.drop-down .drop-down-menu li:last-child { border-bottom: none; }
+
+.drop-down .drop-down-menu a {
+    text-decoration: none;
+    color: #E5E8ED;
+    font-family: 'Cabin', sans-serif;
+    font-size: 17px;
+    padding: 10px;
+}
+
+.drop-down .drop-down-menu a:hover { color: #FD9308; }
+
+/* MAIN NAVIGATION */
 header .logo {
     display: flex;
     align-items: center;
@@ -212,6 +252,15 @@ header .nav a {
     font-family: 'Cabin', sans-serif;
 }
 
+
+header .search-bar {
+    padding: 0;
+}
+
+header .small-toggle-cel {
+    padding-left: 0;
+}
+
 /*=============== PARALLAX BACKGROUND ===============*/
 
 .parallax {
@@ -244,7 +293,7 @@ header .nav a {
 .main-content .content {
     position: relative;
     margin-top: 70px;
-    height: 600px;
+    height: 350px;
 }
 
 .main-content .main .weather-info {
@@ -310,7 +359,6 @@ header .nav a {
 }
 
 /* WEATHER DETAILS */
-
 .weather-details {
     margin-top: 15px;
     padding: 13px;
@@ -337,6 +385,9 @@ header .nav a {
 }
 
 /* FAVORITE CITIES */
+.main-content .fav-pad {
+    padding-left: 0;
+}
 
 .main-content .favorite-cities {
     padding: 10px 13px;
@@ -379,8 +430,9 @@ header .nav a {
     display: none;
 }
 
-/*=============== GOOGLE MAPS ===============*/
 
+
+/*=============== GOOGLE MAPS ===============*/
 .google-map {
     padding-left: 0px;
 }
@@ -395,6 +447,49 @@ header .nav a {
     background: rgba(229, 232, 237, 0.9);
     border-radius: 5px;
 }
+
+/*=============== MEDIA QUERIES ===============*/
+
+@media (max-width: 685px) {
+    .main {
+        width: 100%;
+    }
+
+    header h1 {
+        display: none;
+    }
+
+    header img {
+        height: 40px;
+        width: 40px;
+    }
+    
+    .google-map, .fav-pad {
+        width: 100%;
+        padding-left: 15px !important;
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 993px) {
+    .map-details {
+        height: 300px;
+    }
+
+    .main-content .favorite-cities {
+        margin-top: 15px;
+        max-height: 256px;    
+    }
+}
+
+@media (max-width: 1199px) {
+    .weather-details .wd-col-2 {
+        padding-left: 0;
+    }
+
+    .main-content .content {
+        margin-top: 40px;
+    }
 
 /* ============= GALLERY ============== */
 
