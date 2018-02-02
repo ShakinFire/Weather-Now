@@ -62,7 +62,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-lg-3 col-md-4 search-bar">
+                <div class="col-lg-3 col-md-4 col-xs-9 search-bar">
                     <form action="">
                         <div class="input-group">
                             <input class="form-control search" type="text" placeholder="Search for city...">
@@ -74,20 +74,43 @@
                         </div>
                     </form>
                 </div>
-                <span class="glyphicon glyphicon-menu-hamburger visible-sm visible-xs col-md-1 hamburger" aria-hidden="true"></span>
-                <div class="col-lg-1 hidden-sm hidden-xs">
+                <div>
+                    <a href="#" class="drop-down-hamburger"><span class="glyphicon glyphicon-menu-hamburger visible-sm visible-xs col-md-1 hamburger" aria-hidden="true"></span></a>
+                </div>
+                <div class="col-lg-1 hidden-lg hidden-md hidden-sm small-toggle-cel">
+                    <input type="checkbox" data-size="mini" data-on="&deg;C" data-off="&deg;F" data-onstyle="primary" data-offstyle="warning" checked data-toggle="toggle" id="toggle" data-style="ios">
+                </div>
+                <div class="col-lg-1 hidden-xs">
                     <input type="checkbox" data-size="small" data-on="&deg;C" data-off="&deg;F" data-onstyle="primary" data-offstyle="warning" checked data-toggle="toggle" id="toggle" data-style="ios">
                 </div>
             </div>
         </div>
     </header>
 
+    <!-- DROP DOWN MENU -->
+    <section class="drop-down">
+        <div class="drop-down-menu hidden">
+            <div class="drop-down-wrapper">
+                <ul>
+                    <li>
+                        <a href="#">GALLERY</a>
+                    </li>
+                    <li>
+                        <a href="#">MAPS</a>
+                    </li>
+                    <li>
+                        <a href="#">MOON</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
     <!-- PARALLAX BACKGROUND -->
     <div class="parallax">
         <!-- CONTENT SECTION -->
         <div class="container main-content">
             <div class="row content">
-                <div class="col-md-4 col-sm-6 main">
+                <div class="col-md-4 col-xs-6 main">
                     <div class="weather-info">
                         <p class="head-section-title">CURRENT WEATHER</p>
                         <div class="row">
@@ -170,7 +193,7 @@
                     </div>
                 </div>
     <!-- GOOGLE MAPS -->
-                <div class="col-md-5 col-sm-6 google-map">
+                <div class="col-md-5 col-xs-6 google-map">
                     <div class="google-map-box">
                         <div class="head-section-title">
                             MAPS
@@ -179,7 +202,7 @@
                     </div>
                 </div>
     <!-- FAVORITE CITIES -->
-                <div class="col-md-3 col-sm-6 fav-pad">
+                <div class="col-md-3 col-xs-6 fav-pad">
                     <div class="favorite-cities">
                         <p class="head-section-title">FAVORITES</p>
                         <ul id="ul-fav-cities" class='list-unstyled'>
@@ -275,6 +298,10 @@
         };
         var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
     }
+
+    $(".drop-down-hamburger").on("click", function() {
+        $(".drop-down-menu").toggleClass("visible hidden");
+    });
 </script>
 
 

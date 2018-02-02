@@ -380,7 +380,6 @@ $(function() {
         }
 
         function render(city) {
-            debugger;
             var placeHolder = "";
             if (typeof currentFavorites === "string") {
                 currentFavorites = JSON.parse(currentFavorites);
