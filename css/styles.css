@@ -78,10 +78,7 @@ summary, time, mark, audio, video {
 
 /*=============== HEADER ===============*/
 
-header {
-    background: rgb(54, 60, 66);
-    /* border-bottom: 2px solid #FD9308; */
-}
+header { background: rgb(54, 60, 66); }
 
 /* DROP DOWN MENU */
 header .hamburger {
@@ -93,9 +90,7 @@ header .drop-down-hamburger { text-decoration: none; }
 header .hamburger:hover { color: #FD9308; }
 
 .drop-down .drop-down-menu {
-    position: static;
-    top: 70px;
-    right: 0;
+    display: none;
     background: rgb(54, 60, 66);
     z-index: 99999;
     width: 100%;
@@ -156,18 +151,14 @@ header .nav {
     align-items: center;
 }
 
-header .nav ul {
-    margin-right: 20px;
-}
+header .nav ul { margin-right: 20px; }
 
 header .nav li {
     padding: 0 20px;
     border-right: 1px solid #FD9308;
 }
 
-header .nav li:last-child {
-    border-right: 0;
-}
+header .nav li:last-child { border-right: 0; }
 
 header .nav a {
     color: #E5E8ED;
@@ -177,17 +168,9 @@ header .nav a {
     font-family: 'Cabin', sans-serif;
 }
 
-header .nav a:hover { 
-    color: #FD9308;
-}
-
-header .search-bar {
-    padding: 0;
-}
-
-header .small-toggle-cel {
-    padding-left: 0;
-}
+header .nav a:hover { color: #FD9308; }
+header .search-bar { padding: 0; }
+header .small-toggle-cel { padding-right: 0; }
 
 /*=============== PARALLAX BACKGROUND ===============*/
 
@@ -205,19 +188,13 @@ header .small-toggle-cel {
 /*=============== CONTENT ===============*/
 
 /* ROUND TOGGLE SWITCH BUTTON */
-
 .toggle.ios,
 .toggle-on.ios,
-.toggle-off.ios {
-    border-radius: 20px;
-}
+.toggle-off.ios { border-radius: 20px; }
 
-.toggle.ios .toggle-handle {
-    border-radius: 20px;
-}
+.toggle.ios .toggle-handle { border-radius: 20px; }
 
 /* MAIN CONTENT */
-
 .main-content .content {
     position: relative;
     margin-top: 70px;
@@ -258,9 +235,7 @@ header .small-toggle-cel {
     text-align: center;
 }
 
-.main-content .main .plus-icon:hover {
-    color: rgb(255, 115, 0);
-}
+.main-content .main .plus-icon:hover { color: rgb(255, 115, 0); }
 
 .main-content .main .cel-far {
     font-size: 70px;
@@ -268,17 +243,9 @@ header .small-toggle-cel {
     color: rgb(80, 83, 85);
 }
 
-.weather-descr {
-    text-align: center;
-}
-
-.main-content .main .main-weather-section {
-    margin-top: 20px;
-}
-
-.main-content .main .weather-icon-section {
-    text-align: center;
-}
+.weather-descr { text-align: center; }
+.main-content .main .main-weather-section { margin-top: 20px; }
+.main-content .main .weather-icon-section { text-align: center; }
 
 .main-content .main .main-weather-section-below p {
     margin-top: 10px;
@@ -313,9 +280,7 @@ header .small-toggle-cel {
 }
 
 /* FAVORITE CITIES */
-.main-content .fav-pad {
-    padding-left: 0;
-}
+.main-content .fav-pad { padding-left: 0; }
 
 .main-content .favorite-cities {
     padding: 10px 13px;
@@ -347,9 +312,7 @@ header .small-toggle-cel {
     border-left: 3px solid #FD9308;
 }
 
-.main-content .fav-cities-list:hover .cross i {
-    display: flex;
-}
+.main-content .fav-cities-list:hover .cross i { display: flex; }
 
 .main-content .fav-cities-list .cross i {
     font-size: 18px;
@@ -360,9 +323,7 @@ header .small-toggle-cel {
 
 
 /*=============== GOOGLE MAPS ===============*/
-.google-map {
-    padding-left: 0px;
-}
+.google-map { padding-left: 0px; }
 
 .map-details {
     width: 100%;
@@ -376,10 +337,7 @@ header .small-toggle-cel {
 }
 
 /* ============= GALLERY ============== */
-
-.gallery {
-    margin:50px auto;
-}
+.gallery { margin:50px auto; }
 
 .gallery h2 {
     text-align: center;
@@ -392,9 +350,7 @@ header .small-toggle-cel {
     margin-bottom: 30px;
 }
 
-.gallery a {
-    margin-bottom: 20px;
-}
+.gallery a { margin-bottom: 20px; }
 
 .gallery img {
     width: 100%;
@@ -402,7 +358,6 @@ header .small-toggle-cel {
 }
 
 /* TEAM */
-
 .team .team-title {
     margin-top: 30px;
     background: rgba(229, 232, 237, 0.99);
@@ -423,13 +378,9 @@ header .small-toggle-cel {
     border-radius: 5px;
 }
 
-.team h3 {
-    margin:10px 0 5px 0;
-}
+.team h3 { margin:10px 0 5px 0; }
 
-.team p {
-    font-size:1.15em;
-}
+.team p { font-size:1.15em; }
 .team .fa {
     margin-top:6px;
     font-size:2em;
@@ -442,12 +393,9 @@ footer {
     padding:10px;
     height:40px;
 }
-footer ul {
-    list-style-type:none;
-}
-footer ul li {
-    margin-right:12px;
-}
+
+footer ul { list-style-type:none; }
+footer ul li { margin-right:12px; }
 
 footer .fa {
     margin-top:-2px;
@@ -456,7 +404,6 @@ footer .fa {
     color:#5A6571;
 }
 
-
 .navBar {
     background-color: #5A6571;
     color: white;
@@ -464,13 +411,8 @@ footer .fa {
     align-content: center;
 }
 
-.hamburger {
-    font-size: 30px;
-}
-
-.hamb-menu {
-    padding: 1%;
-}
+.hamburger { font-size: 30px; }
+.hamb-menu { padding: 1%; }
 
 .hamb-menu li a {
     color: white;
@@ -496,9 +438,7 @@ footer .fa {
     text-align: center;
 }
 
-
 /*=============== MEDIA QUERIES ===============*/
-
 @media (max-width: 685px) {
     .main {
         width: 100%;

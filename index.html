@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <!-- GOOGLE FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:700" rel="stylesheet">
-    <!-- <link href="https://fonts.googleapis.com/css?family=Cabin:600" rel="stylesheet"> -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:300" rel="stylesheet">
     <!-- BOOTSTRAP FILE -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -78,14 +77,11 @@
                         </div>
                     </form>
                 </div>
-                <div>
-                    <a href="#" class="drop-down-hamburger"><span class="glyphicon glyphicon-menu-hamburger visible-sm visible-xs col-md-1 hamburger" aria-hidden="true"></span></a>
-                </div>
-                <div class="col-lg-1 hidden-xs">
+                <div class="col-lg-1 small-toggle-cel">
                     <input type="checkbox" data-size="small" data-on="&deg;C" data-off="&deg;F" data-onstyle="primary" data-offstyle="warning" checked data-toggle="toggle" id="toggle" data-style="ios">
                 </div>
-                <div class="col-lg-1 hidden-lg hidden-md hidden-sm small-toggle-cel">
-                    <input type="checkbox" data-size="mini" data-on="&deg;C" data-off="&deg;F" data-onstyle="primary" data-offstyle="warning" checked data-toggle="toggle" id="toggle" data-style="ios">
+                <div>
+                    <a href="#" class="drop-down-hamburger"><span class="glyphicon glyphicon-menu-hamburger visible-sm visible-xs col-md-1 hamburger" aria-hidden="true"></span></a>
                 </div>
             </div>
         </div>
@@ -93,17 +89,17 @@
 
     <!-- DROP DOWN MENU -->
     <section class="drop-down">
-        <div class="drop-down-menu hidden">
+        <div class="drop-down-menu">
             <div class="drop-down-wrapper">
                 <ul>
                     <li>
-                        <a href="#">HOME</a>
+                        <a href="#main-content">HOME</a>
                     </li>
                     <li>
-                        <a href="#">GALLERY</a>
+                        <a href="#gallery-content">GALLERY</a>
                     </li>
                     <li>
-                        <a href="#">TEAM</a>
+                        <a href="#team-content">TEAM</a>
                     </li>
                 </ul>
             </div>
@@ -151,7 +147,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- WEATHER DETAILS -->
+        <!-- WEATHER DETAILS -->
                     <div class="weather-details">
                         <p class="head-section-title">WEATHER DETAILS</p>
                         <div class='row'>
@@ -203,7 +199,7 @@
                     </div>
                 </div>
 
-    <!-- GOOGLE MAPS -->
+        <!-- GOOGLE MAPS -->
                 <div class="col-md-5 col-xs-6 google-map">
                     <div class="google-map-box">
                         <div class="head-section-title">
@@ -213,7 +209,7 @@
                     </div>
                 </div>
 
-    <!-- FAVORITE CITIES -->
+        <!-- FAVORITE CITIES -->
                 <div class="col-md-3 col-xs-6 fav-pad">
                     <div class="favorite-cities">
                         <p class="head-section-title">FAVORITES</p>
@@ -268,6 +264,8 @@
                 </a>
             </div>
     </div>
+
+    <!-- TEAM -->
     <div class="parallax">
         <div class="container team" id="team-content">
             <div class="row">
@@ -338,6 +336,8 @@
 
         </div>
     </div>
+
+    <!-- FOOTER -->
     <div class="container">
         <footer>
             <div class="col-md-2">
@@ -401,11 +401,9 @@
 
 
     $(".drop-down-hamburger").on("click", function() {
-        $(".drop-down-menu").toggleClass("visible hidden");
+        $(".drop-down-menu").slideToggle(600);
     });
 </script>
-
-
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkUlIYkH9OJ-loM6ADhmojHM6Ve7yHaSw&callback=myMap"></script>
 
 </html>
