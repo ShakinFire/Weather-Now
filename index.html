@@ -9,7 +9,7 @@
     <!-- FONT-AWSOME ICONS -->
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <!-- GOOGLE FONTS -->
-    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito:300" rel="stylesheet">
     <!-- BOOTSTRAP FILE -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -20,9 +20,8 @@
     <!-- WEATHER ICONS FILE -->
     <link rel="stylesheet" href="css/weather-icons.min.css">
     <link rel="stylesheet" href="js/jquery-ui.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.1/jquery.fancybox.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.1/jquery.fancybox.js"></script>
 </head>
 
 <body>
@@ -72,16 +71,19 @@
                             <span class="input-group-btn">
                                 <button class="btn btn-primary button" type="submit" onclick="myMapChange()">
                                     <span class="glyphicon glyphicon-search"></span>
-                            </button>
+                                </button>
                             </span>
                         </div>
                     </form>
                 </div>
                 <div class="col-lg-1 small-toggle-cel">
-                    <input type="checkbox" data-size="small" data-on="&deg;C" data-off="&deg;F" data-onstyle="primary" data-offstyle="warning" checked data-toggle="toggle" id="toggle" data-style="ios">
+                    <input type="checkbox" data-size="small" data-on="&deg;C" data-off="&deg;F" data-onstyle="primary" data-offstyle="warning"
+                        checked data-toggle="toggle" id="toggle" data-style="ios">
                 </div>
                 <div>
-                    <a href="#" class="drop-down-hamburger"><span class="glyphicon glyphicon-menu-hamburger visible-sm visible-xs col-md-1 hamburger" aria-hidden="true"></span></a>
+                    <a href="#" class="drop-down-hamburger">
+                        <span class="glyphicon glyphicon-menu-hamburger visible-sm visible-xs col-md-1 hamburger" aria-hidden="true"></span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -147,7 +149,7 @@
                             </div>
                         </div>
                     </div>
-        <!-- WEATHER DETAILS -->
+                    <!-- WEATHER DETAILS -->
                     <div class="weather-details">
                         <p class="head-section-title">WEATHER DETAILS</p>
                         <div class='row'>
@@ -199,7 +201,7 @@
                     </div>
                 </div>
 
-        <!-- GOOGLE MAPS -->
+                <!-- GOOGLE MAPS -->
                 <div class="col-md-5 col-xs-6 google-map">
                     <div class="google-map-box">
                         <div class="head-section-title">
@@ -209,7 +211,7 @@
                     </div>
                 </div>
 
-        <!-- FAVORITE CITIES -->
+                <!-- FAVORITE CITIES -->
                 <div class="col-md-3 col-xs-6 fav-pad">
                     <div class="favorite-cities">
                         <p class="head-section-title">FAVORITES</p>
@@ -220,7 +222,7 @@
             </div>
         </div>
     </div>
-  
+
     <!-- GALLERY -->
     <div class="container gallery" id="gallery-content">
         <h2 class="head-section-title">GALLERY</h1>
@@ -340,8 +342,8 @@
     <!-- FOOTER -->
     <div class="container">
         <footer>
-            <div class="col-md-2">
-                © 2016 Company, Inc.
+            <div class="col-md-3">
+                © 2018 WeatherNow, Inc.
             </div>
             <div class="col-md-4">
                 <ul class="footer-nav">
@@ -369,6 +371,7 @@
 
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.1/jquery.fancybox.js"></script>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
     <script src="js/database.js"></script>
@@ -400,9 +403,7 @@
     }
 
 
-    $(".drop-down-hamburger").on("click", function() {
-        $(".drop-down-menu").slideToggle(600);
-    });
+
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkUlIYkH9OJ-loM6ADhmojHM6Ve7yHaSw&callback=myMap"></script>
 

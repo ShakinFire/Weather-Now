@@ -47,7 +47,6 @@ var database = (function () {
         var un = unit || "metric";
         var url = "";
         if (place.hasOwnProperty("city")) {
-            console.log(place)
             var city = place.city;;
             url = "http://api.openweathermap.org/data/2.5/weather?q=" + city +
                 "&appid=b566e35c1181791b83b9aefcbe9be910&units=" + un;
@@ -55,7 +54,6 @@ var database = (function () {
             var lat = place.lat;
             var lon = place.lon;
             url = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=b566e35c1181791b83b9aefcbe9be910&units=" + un;
-            console.log(url);
         }
 
         getRequest(url).then(function (data) {

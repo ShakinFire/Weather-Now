@@ -48,6 +48,10 @@ var app = (function () {
             }
         });
 
+        $(".drop-down-hamburger").on("click", function () {
+            $(".drop-down-menu").slideToggle(600);
+        });
+
         //toggle between measurement unit C/F
         $('#toggle').change(function () {
             if ($(this).prop('checked')) {
@@ -59,7 +63,9 @@ var app = (function () {
         });
 
         //add favorite city
-        $("#add-city").on("click", favorites.addCity);
+        $("#add-city").on("click", function(e) {
+            favorites.addCity
+        });
 
         //delete favorite city
         $(document).on("click", ".cross", favorites.deleteCity);
