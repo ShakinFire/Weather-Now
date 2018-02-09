@@ -64,7 +64,8 @@ var app = (function () {
 
         //add favorite city
         $("#add-city").on("click", function(e) {
-            favorites.addCity
+            console.log("clicked");
+            favorites.addCity()
         });
 
         //delete favorite city
