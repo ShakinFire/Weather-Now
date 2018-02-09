@@ -80,8 +80,11 @@ summary, time, mark, audio, video {
 
 header { background: rgb(54, 60, 66); }
 
+.drop-down {
+    display:none;
+}
 /* DROP DOWN MENU */
-header .hamburger {
+/* header .hamburger {
     font-size: 35px;
     color: rgb(235, 235, 235);
 }
@@ -114,7 +117,7 @@ header .hamburger:hover { color: #FD9308; }
     padding: 10px;
 }
 
-.drop-down .drop-down-menu a:hover { color: #FD9308; }
+.drop-down .drop-down-menu a:hover { color: #FD9308; } */
 
 /* MAIN NAVIGATION */
 header .logo {
@@ -478,5 +481,58 @@ footer .fa {
 
     .main-content .content {
         margin-top: 40px;
+    }
+    header .hamburger {
+        font-size: 35px;
+        color: rgb(235, 235, 235);
+    }
+
+    .drop-down {
+        display:block;
+    }
+
+    header .drop-down-hamburger {
+        text-decoration: none;
+    }
+
+    header .hamburger:hover {
+        color: #FD9308;
+    }
+
+    .drop-down .drop-down-menu {
+        display: none;
+        background: rgb(54, 60, 66);
+        z-index: 99999;
+        width: 100%;
+        text-align: center;
+    }
+
+    .drop-down .drop-down-wrapper {
+        padding: 0 10px;
+    }
+
+    .drop-down .drop-down-menu ul {
+        list-style-type: none;
+    }
+
+    .drop-down .drop-down-menu li {
+        padding: 10px 3px;
+        border-bottom: 1px solid rgb(207, 207, 207)
+    }
+
+    .drop-down .drop-down-menu li:last-child {
+        border-bottom: none;
+    }
+
+    .drop-down .drop-down-menu a {
+        text-decoration: none;
+        color: #E5E8ED;
+        font-family: 'Cabin', sans-serif;
+        font-size: 17px;
+        padding: 10px;
+    }
+
+    .drop-down .drop-down-menu a:hover {
+        color: #FD9308;
     }
 }
