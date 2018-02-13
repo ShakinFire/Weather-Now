@@ -2,21 +2,26 @@ var app = (function () {
     var unit = "metric";
     var currentCity = "";
 
-    var boot = function (unit) {
+    var boot = function () {
         update("London", unit)
-        database.getWeatherInfoByLoc(unit, DOM.displayData, function () {});
-        currentCity = DOM.currentCityName;
-        favorites.render();
+
+        data.getWeatherInfoByLoc().then(function (data) {
+            DOM.displayData(data);
+            currentCity = DOM.currentCityName;
+            favorites.render();
+            console.log(data)
+        })
     }
 
     var update = function (cityName, unit) {
-        let cityObj = {
-            city: cityName
-        };
-        database.getWeatherInfo(cityObj, unit, DOM.displayData, function() {
+        data.getWeatherInfo(cityName, unit).then(function (data) {
+            console.log(data);
+            DOM.displayData(data);
+        }).catch(function () {
             DOM.displayError("No results found. :(");
         });
-        currentCity = cityName;
+
+        currentCity = cityName
     };
 
     var bindEvents = function () {
@@ -35,7 +40,7 @@ var app = (function () {
         // autocomplete functionality to the search bar
         $(".search").autocomplete({
             source: function (request, response) {
-                var matches = $.map(database.citiesList, function (acItem) {
+                var matches = $.map(data.citiesList, function (acItem) {
                     if (acItem.toUpperCase().indexOf(request.term.toUpperCase()) ===
                         0) {
                         return acItem;
@@ -63,7 +68,7 @@ var app = (function () {
         });
 
         //add favorite city
-        $("#add-city").on("click", function(e) {
+        $("#add-city").on("click", function (e) {
             console.log("clicked");
             favorites.addCity()
         });

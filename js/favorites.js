@@ -1,5 +1,5 @@
 var favorites = (function () {
-    var currentFavorites = database.getFavorites();
+    var currentFavorites = data.getFavorites();
     var $ulFavorites = $("#ul-fav-cities");
     var $anchorList = $(".fav-citites-list");
     var elementTemplate = function (place) {

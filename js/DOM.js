@@ -1,13 +1,8 @@
 var DOM = (function () {
     var currentCityName = $(".city-name").text();;
 
-    var _changeIcon = function (name, time) {
-        var defaultClass = "wi weather-icon";
-        var _changeClass = function (newClass) {
-            $("#icon").removeClass();
-            $("#icon").addClass(defaultClass);
-            $("#icon").addClass(newClass);
-        }
+    var _chooseIconClass = function(name, time) {
+        var newClass = "";
         if (name === "Thunderstorm") {
             newClass = "wi-day-snow-thunderstorm"
         } else if (name === 'Clouds') {
@@ -28,8 +23,18 @@ var DOM = (function () {
             newClass = "wi-fog"
         }
 
-        _changeClass(newClass);
+        return newClass;
+    }
+    var _changeIconClass = function (newClass) {
+        var defaultClass = "wi weather-icon";
+        $("#icon").removeClass();
+        $("#icon").addClass(defaultClass);
+        $("#icon").addClass(newClass);
+    }
 
+    var _changeIcon = function (name, time) {
+        let newClass = _chooseIconClass(name, time)
+        _changeIconClass(newClass);
     }
 
     function _convertFromUnixTimeStamp(t) {
